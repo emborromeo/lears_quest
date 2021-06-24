@@ -86,7 +86,8 @@ $test_code = $_REQUEST['test_code'];
     document.execCommand("copy");
 
     /* Alert the copied text */
-    alert("Copied the text: " + copyCode.value);
+    alert("Copied the code: " + copyCode.value);
+    window.location.href="dashboard.php";
    }
   </script>
 </body>

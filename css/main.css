@@ -59,7 +59,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #57b846;
+  color: #333333;
 }
 
 /*---------------------------------------------*/
@@ -405,18 +405,24 @@ iframe {
   *display: inline;
   /*border: 1px solid #d4d4d4;*/
   height: 32px;
+  width: 40px;
+  border-radius: 240px;
+  background-color: #00a1cb;
   line-height: 32px;
   padding: 0px 25.6px;
   font-weight: 300;
   font-size: 14px;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  color: #666666;
-  text-shadow: 0 1px 1px white;
   margin: 0;
   text-decoration: none;
   text-align: center;
-}
+  padding: 8px;
+  color: white;
+  text-shadow: 0 -1px 1px rgba(0, 40, 50, 0.35);
+  box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.5), 0px 1px 2px rgba(0, 0, 0, 0.2);
 
+}
+/**
 .button-circle {
   -webkit-border-radius: 240px;
   -moz-border-radius: 240px;
@@ -433,6 +439,7 @@ iframe {
   border-width: 4px;
   font-size: 18px;
 }
+
 .button-primary {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #00b5e5), color-stop(100%, #008db2));
   background: -webkit-linear-gradient(top, #00b5e5, #008db2);
@@ -444,7 +451,7 @@ iframe {
   color: white;
   text-shadow: 0 -1px 1px rgba(0, 40, 50, 0.35);
 }
-
+*/
 /*MAIN QUIZ*/
 .container-quiz{
   width: 80%;

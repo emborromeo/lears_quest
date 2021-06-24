@@ -1,13 +1,21 @@
 <?php
 session_start();
-if(!isset($_SESSION["player_id"]))
+if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
+}
 
 ?>
 
 <?php
 include '../database/config.php';
-$resultCode = $_POST["testCode"];
+$student_id = $_SESSION['player_id'];
+$currentCode = $_SESSION['code'];
 
+//$resultCode = $_POST["testCode"];
+    $studentInfo = "SELECT * FROM students WHERE student_id = '$student_id'";
+	$resultStudent = mysqli_query($conn,$studentInfo);
+	$rowStudent = mysqli_fetch_assoc($resultStudent);
+
+	$studentScore = (int) $rowStudent['score'];
 ?>
 <html>
 	<head>
@@ -45,14 +53,16 @@ $resultCode = $_POST["testCode"];
 					</div>
 
 			 	</div>
-				<div class="row justify-content-md-center">
+				<div class="row justify-content-md-center" style="display: contents; padding:40px">
 
 					<div class="col-12" style="display:contents">
-						<img src="../images/title-sample1.png" alt="" style="width: 50%">
-					</div>
+						<h1>Your Final Score is</h1>
+                        <h1><?= $studentScore?></h1>
 
+					</div>
+                    <br>
 					<div class="col-12"  style="display:contents">
-                        <a href="playerMap.php?quiz_code=<?php echo $resultCode;?>"> <button class="role-form-bn"> <img src="../images/btn-start.png" alt="" style="width: 20%;"></button></a>
+                    <a href="#"><button class="role-form-bn" onclick="retryQuiz()">Retry</button></a>
 					</div>
 				</div>
 
@@ -65,11 +75,6 @@ $resultCode = $_POST["testCode"];
 		
 	
 <script>
-
-	function start(){
-	window.location.replace("playerMap.php");
-
-	}
     function pauseMusic(){
         let bgMusic= document.getElementById("bgMusic");
 
@@ -80,6 +85,24 @@ $resultCode = $_POST["testCode"];
             bgMusic.pause();
         }
     }
+      
+   function retryQuiz(){
+    let studentid = <?php echo (int) $student_id; ?>;
+    let currentCode = <?php echo json_encode($currentCode) ; ?>;
+
+    $.ajax({
+      url: "retryQuiz.php",
+      type: "POST",
+      data:{"score":0,
+      "currrent_student":studentid},
+	  success: function(data){
+		window.location = "playerMap.php?quiz_code=currentCode";
+
+	}
+    })
+
+   }
+ 
 </script>
 </body>
 </html>

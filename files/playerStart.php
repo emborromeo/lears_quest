@@ -8,6 +8,8 @@ if(!isset($_SESSION["player_id"]))
 include '../database/config.php';
 $resultCode = $_POST["testCode"];
 
+$_SESSION['code'] = $resultCode;
+
 ?>
 <html>
 	<head>

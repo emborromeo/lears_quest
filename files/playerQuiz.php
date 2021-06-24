@@ -1,7 +1,9 @@
 <?php
 session_start();
-if(isset($_SESSION["player_id"])){
-  $code = $_SESSION['codeQuiz'];
+if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
+  $code = $_SESSION['code'];
+
+  
   $questionid = $_REQUEST['id'];
 
   $score;
@@ -44,7 +46,9 @@ if(isset($_SESSION["player_id"])){
   /*
     $studentNewScore = "UPDATE students SET score = '5' where student_id='$student_id'";
 		$saveScore = mysqli_query($conn,$studentNewScore);
-  */
+  */	
+  
+
 ?>
 
 
@@ -214,7 +218,6 @@ margin-top: -50px;
 
 <script type="text/javascript">
     let answer  = <?php echo json_encode ($row1['correctAns']); ?>; 
-    let questionScore = <?php echo (int) $row1["score"]; ?>;
 
   function submitAnswer(){    
 
@@ -273,6 +276,8 @@ margin-top: -50px;
     })
 
    }
+
+ 
 
 </script>
 </body>

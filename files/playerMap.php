@@ -1,10 +1,11 @@
 <?php
 session_start();
-if(isset($_SESSION["player_id"])){
-	$test_code = $_REQUEST['quiz_code'];
-    $_SESSION['codeQuiz'] = $test_code;
+if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 
-	  //if question is answered 2
+//	$test_code = $_REQUEST['quiz_code'];
+  //  $_SESSION['codeQuiz'] = $test_code;
+
+	  //if question is answegray 2
 
 	//$var_value = $_SESSION['varname'];
 }
@@ -13,16 +14,12 @@ if(isset($_SESSION["player_id"])){
 <?php
 	include '../database/config.php';
 	$student_id = $_SESSION['player_id'];
+	$ccode = $_SESSION['code'];
 
-	$testCode = "SELECT * FROM tbl_tests WHERE generatedCode = '$test_code'";
+	$testCode = "SELECT * FROM tbl_tests WHERE generatedCode = '$ccode'";
 	$resultTest = mysqli_query($conn,$testCode);
 	$rowTest = mysqli_fetch_assoc($resultTest);
 	$testId = (int) $rowTest['id'];
- 
-	
-	//total questions
-
-	$totalQuest = (int) $rowTest['total_questions'];
 
 
     $sql = "SELECT question_id FROM question_test_mapping WHERE test_id = $testId";
@@ -34,8 +31,12 @@ if(isset($_SESSION["player_id"])){
             $result1 = mysqli_query($conn,$sql1);
             $row1 = mysqli_fetch_assoc($result1);
 		}
+	//total questions
+	$totalQuests="SELECT COUNT(*) FROM question_test_mapping WHERE test_id=$testId";
+	$resultQuest = mysqli_query($conn,$totalQuests);
+	$rowQuest = mysqli_fetch_assoc($resultQuest);
 
-		
+	//	getting students score and progress
 	$studentInfo = "SELECT * FROM students WHERE student_id = '$student_id'";
 	$resultStudent = mysqli_query($conn,$studentInfo);
 	$rowStudent = mysqli_fetch_assoc($resultStudent);
@@ -111,7 +112,7 @@ if(isset($_SESSION["player_id"])){
 					<div class="container-quests">
 					<div class="row" style="margin: 30px;">
 							<div class="col-2">
-								<a href="playerQuiz.php?id=<?php echo $row1["id"]+9; ?>" id="quest10" class="button-quest button-circle button-primary">10</a>					
+								<a href="#" id="quest10" class="button-quest ">10</a>					
 
 							</div>
 							<div class="col-2">
@@ -126,44 +127,44 @@ if(isset($_SESSION["player_id"])){
 
 							</div>
 							<div class="col-2" >
-								<a href="playerQuiz.php?id=<?php echo $row1["id"]+8; ?>"  id="quest9" class="button-quest button-circle button-primary" > 9</a>	</button>				
+								<a href="#"  id="quest9" class="button-quest" > 9</a>	</button>				
 
 							</div>
 					
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-4">
-								<a href="playerQuiz.php?id=<?php echo $row1["id"]+7; ?>"  id="quest8" class="button-quest button-circle button-primary" disabled>8</a>					
+								<a href="#"  id="quest8" class="button-quest" disabled>8</a>					
 
 							</div>
 							<div class="col-8">
-								<a href="playerQuiz.php?id=<?php echo $row1["id"]+6; ?>"  id="quest7" class="button-quest button-circle button-primary" style="margin-left: 40px;" disabled>7</a>	
+								<a href="#"  id="quest7" class="button-quest " style="margin-left: 40px;" disabled>7</a>	
 
 							</div>
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-3">
-								<a href="playerQuiz.php?id=<?php echo $row1["id"]+5; ?>" id="quest6"  class="button-quest button-circle button-primary" disabled>6</a>					
+								<a href="#" id="quest6"  class="button-quest" disabled>6</a>					
 
 							</div>
 							<div class="col-6">
 
 							</div>	
 							<div class="col-3">
-								<a href="playerQuiz.php?id=<?php echo $row1["id"]+4; ?>"  id="quest5" class="button-quest button-circle button-primary" style="margin-right:100px 50px;" disabled>5</a>					
+								<a href="#"  id="quest5" class="button-quest " style="margin-right:100px 50px;" disabled>5</a>					
 
 							</div>	
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-4">
-								<a href="playerQuiz.php?id=<?php echo $row1["id"]+3; ?>"  id="quest4" class="button-quest button-circle button-primary" style="margin-right:100px 50px;" disabled>4</a>					
+								<a href="#"  id="quest4" class="button-quest" style="margin-right:100px 50px;" disabled>4</a>					
 
 							</div>
 							<div class="col-4">
 								
 							</div>	
 							<div class="col-4">
-								<a href="playerQuiz.php?id=<?php echo $row1["id"]+2; ?>"  id="quest3" class="button-quest button-circle button-primary"  style="margin-bottom: -50px;margin-left: 110px;" disabled>3</a>	
+								<a href="#"  id="quest3" class="button-quest"  style="margin-bottom: -50px;margin-left: 110px;" disabled>3</a>	
 
 							</div>	
 							<div class="col-4">
@@ -172,7 +173,7 @@ if(isset($_SESSION["player_id"])){
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-2">
-								<a href="playerQuiz.php?id=<?php echo $row1["id"]+1; ?>"  id="quest2" class="button-quest button-circle button-primary"  style="margin-bottom:30px ;">2</a>					
+								<a href="#"  id="quest2" class="button-quest "  style="margin-bottom:30px ;">2</a>					
 
 							</div>
 							<div class="col-3">
@@ -185,7 +186,7 @@ if(isset($_SESSION["player_id"])){
 
 							</div>	
 							<div class="col-2">	
-								<a href="playerQuiz.php?id=<?php echo $row1["id"]; ?>"  id="quest1" class="button-quest button-circle button-primary" style="margin:30px ;">	1<img src="../images/boy.png" width="70px" hidden></a>	
+								<a href="playerQuiz.php?id=<?php echo $row1["id"]; ?>"  id="quest1" class="button-quest" style="margin:30px ;">	1<img src="../images/boy.png" width="70px" hidden></a>	
 							</div>
 						</div>
 	
@@ -204,7 +205,9 @@ if(isset($_SESSION["player_id"])){
 							<p class="gameStory" id="story2"></p>
 							<p class="gameStory" id="story3"></p>					
 							<button id="continueBtn" onclick="continueText()" style="display: inline;">Continue</button>
-							<a href="playerQuiz.php?id=<?php echo $row1["id"];?>"  id="toQuest1" style="display:none">Go to quest 1</a>	
+							<a href="playerQuiz.php?id=<?php echo $row1["id"];?>"  id="toQuest1" style="display:none">Go to quest 1</a>
+							<a href="finalScorePage.php?code=<?php echo $ccode;?>"  id="finalScorePage" style="display:none">View Final Score</a>	
+	
 
 						</div>						
 
@@ -226,6 +229,8 @@ if(isset($_SESSION["player_id"])){
 	let testTotal  = <?php echo (int) ($rowTest['total_questions']); ?>; 
 	console.log(testTotal);
 	let currentScore  = <?php echo (int) ($rowStudent['score']); ?>; 
+	let currentProgress  = <?php echo (int) ($rowStudent['progress']); ?>; 
+
 
 	function backBtn1(){
 		window.location.replace("playerStart.php");
@@ -248,7 +253,7 @@ if(isset($_SESSION["player_id"])){
 	let pStory3 = document.getElementById("story3");
 
 
-	let story1 = 'I am Lear, I have some great quests prepared for young backpackers like you to train you as you take the journey of becoming the next generation of great adventurers.';
+	let story1 = 'I am Lear, I have some great quests prepagray for young backpackers like you to train you as you take the journey of becoming the next generation of great adventurers.';
 	let story2 ='As you explore and conquer the quests, you will gain valuable knowledge and skills that will help you overcome more and harder challenges you will encounter as you go on your journey.';
 	let story3 = 'Now, are you ready to go on an adventure?  If you are, then LET\'S GO !!!';
 	let speed = 50;
@@ -396,11 +401,7 @@ if(isset($_SESSION["player_id"])){
  
 	}
 
-	if(currentScore>=1){
-		document.getElementById("welcomeText").style.display="none";
-		document.getElementById("continueBtn").style.display="none";
-
-	}
+	
 
 	if(testTotal==1){
 		document.getElementById("quest2").style.visibility = "hidden"; 
@@ -469,6 +470,137 @@ if(isset($_SESSION["player_id"])){
 	}
 	else{
 		console.log("no quests"); 
+	}
+
+	if(currentProgress==1){
+		document.getElementById("quest1").style.backgroundColor="gray";
+		document.getElementById("quest1").href = "#"; 
+		document.getElementById("quest2").href = "playerQuiz.php?id=<?php echo $row1["id"]+1; ?>"; 
+
+
+	}
+	else if(currentProgress==2){
+		document.getElementById("quest1").style.backgroundColor="gray";
+		document.getElementById("quest2").style.backgroundColor="gray";
+
+		document.getElementById("quest1").href = "#"; 
+		document.getElementById("quest3").href = "playerQuiz.php?id=<?php echo $row1["id"]+2; ?>"; 
+
+	}
+	else if(currentProgress==3){
+		document.getElementById("quest1").style.backgroundColor="gray";
+		document.getElementById("quest2").style.backgroundColor="gray";
+		document.getElementById("quest3").style.backgroundColor="gray";
+
+		document.getElementById("quest4").href = "playerQuiz.php?id=<?php echo $row1["id"]+3; ?>"; 
+
+	}
+	else if(currentProgress==4){
+		document.getElementById("quest1").style.backgroundColor="gray";
+		document.getElementById("quest2").style.backgroundColor="gray";
+		document.getElementById("quest3").style.backgroundColor="gray";
+		document.getElementById("quest4").style.backgroundColor="gray";
+
+		document.getElementById("quest1").href = "#"; 
+
+		document.getElementById("quest5").href = "playerQuiz.php?id=<?php echo $row1["id"]+4; ?>"; 
+
+	}
+	else if(currentProgress==5){
+		document.getElementById("quest1").style.backgroundColor="gray";
+		document.getElementById("quest2").style.backgroundColor="gray";
+		document.getElementById("quest3").style.backgroundColor="gray";
+		document.getElementById("quest4").style.backgroundColor="gray";
+		document.getElementById("quest5").style.backgroundColor="gray";
+
+		document.getElementById("quest6").href = "playerQuiz.php?id=<?php echo $row1["id"]+5; ?>"; 
+
+		
+	}
+	else if(currentProgress==6){
+		document.getElementById("quest1").style.backgroundColor="gray";
+		document.getElementById("quest2").style.backgroundColor="gray";
+		document.getElementById("quest3").style.backgroundColor="gray";
+		document.getElementById("quest4").style.backgroundColor="gray";
+		document.getElementById("quest5").style.backgroundColor="gray";
+		document.getElementById("quest6").style.backgroundColor="gray";
+
+		document.getElementById("quest7").href = "playerQuiz.php?id=<?php echo $row1["id"]+6; ?>"; 
+
+	}
+	else if(currentProgress==7){
+		document.getElementById("quest1").style.backgroundColor="gray";
+		document.getElementById("quest2").style.backgroundColor="gray";
+		document.getElementById("quest3").style.backgroundColor="gray";
+		document.getElementById("quest4").style.backgroundColor="gray";
+		document.getElementById("quest5").style.backgroundColor="gray";
+		document.getElementById("quest6").style.backgroundColor="gray";
+		document.getElementById("quest7").style.backgroundColor="gray";
+
+		document.getElementById("quest8").href = "playerQuiz.php?id=<?php echo $row1["id"]+7; ?>"; 
+
+	}
+	else if(currentProgress==8){
+		document.getElementById("quest1").style.backgroundColor="gray";
+		document.getElementById("quest2").style.backgroundColor="gray";
+		document.getElementById("quest3").style.backgroundColor="gray";
+		document.getElementById("quest4").style.backgroundColor="gray";
+		document.getElementById("quest5").style.backgroundColor="gray";
+		document.getElementById("quest6").style.backgroundColor="gray";
+		document.getElementById("quest7").style.backgroundColor="gray";
+		document.getElementById("quest8").style.backgroundColor="gray";
+
+		document.getElementById("quest9").href = "playerQuiz.php?id=<?php echo $row1["id"]+8; ?>"; 
+
+	}
+	else if(currentProgress==9){
+		document.getElementById("quest1").style.backgroundColor="gray";
+		document.getElementById("quest2").style.backgroundColor="gray";
+		document.getElementById("quest3").style.backgroundColor="gray";
+		document.getElementById("quest4").style.backgroundColor="gray";
+		document.getElementById("quest5").style.backgroundColor="gray";
+		document.getElementById("quest6").style.backgroundColor="gray";
+		document.getElementById("quest7").style.backgroundColor="gray";
+		document.getElementById("quest8").style.backgroundColor="gray";
+		document.getElementById("quest9").style.backgroundColor="gray";
+
+		document.getElementById("quest10").href = "playerQuiz.php?id=<?php echo $row1["id"]+9; ?>"; 
+
+	}
+	else if(currentProgress==10){
+		document.getElementById("quest1").style.backgroundColor="gray";
+		document.getElementById("quest2").style.backgroundColor="gray";
+		document.getElementById("quest3").style.backgroundColor="gray";
+		document.getElementById("quest4").style.backgroundColor="gray";
+		document.getElementById("quest5").style.backgroundColor="gray";
+		document.getElementById("quest6").style.backgroundColor="gray";
+		document.getElementById("quest7").style.backgroundColor="gray";
+		document.getElementById("quest8").style.backgroundColor="gray";
+		document.getElementById("quest9").style.backgroundColor="gray";
+		document.getElementById("quest10").style.backgroundColor="gray";
+
+
+	}
+	else{
+		document.getElementById("quest2").href = "#"; 
+		document.getElementById("quest3").href = "#"; 
+		document.getElementById("quest4").href = "#"; 
+		document.getElementById("quest5").href = "#"; 
+		document.getElementById("quest6").href = "#"; 
+		document.getElementById("quest7").href = "#"; 
+		document.getElementById("quest8").href = "#"; 
+		document.getElementById("quest9").href = "#"; 
+		document.getElementById("quest10").href = "#"; 
+
+	}
+	if(currentProgress>=1){
+		document.getElementById("welcomeText").style.display="none";
+		document.getElementById("continueBtn").style.display="none";
+
+	}
+	if(currentProgress==testTotal){
+		document.getElementById("finalScorePage").style.display="inline";
+
 	}
 </script>
 
