@@ -14,7 +14,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 		echo "success";		
 		$row = mysqli_fetch_assoc($res);
 		$_SESSION["player_id"] = $row["id"];	
-		$_SESSION["player_id"] = $row["id"];	
 
 //		echo "<script> window.location.assign('playerStart.php');</script>";
 

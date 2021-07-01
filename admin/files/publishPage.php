@@ -9,6 +9,7 @@ if(!isset($_SESSION["user_id"]))
 
 $test_code = $_REQUEST['test_code'];
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +41,7 @@ $test_code = $_REQUEST['test_code'];
 						
 						<div class="login100-form validate-form">
 						<span class="login100-form-title">
-							Here's the quiz code.
+							Here's the quiz code:
 						</span>
 						
             <div id="login_form">
@@ -57,15 +58,31 @@ $test_code = $_REQUEST['test_code'];
                   <div class="row center-element py-3">
                     <div class="col-md-12">
                       <div class="form-group" style="width: 100%;">
-                        <button class="role-form-btn" onclick="copyCode()">Copy</button>
+                        <button class="role-form-btn" onclick="copyCode()" data-toggle="modal" data-target="#" id="modalCopyAlert">Copy</button> <br>
                       </div>
                     </div>
                   </div>
               
                 </div>
             </div>
+
+            <div class="modal fade" id="questionAlert" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+              <div class="modal-body">
+                <span id="modalText"></span>
+              </div>
+              <div class="modal-footer">
+                <a href="dashboard.php" class="role-form-btn"  ><button type="button" style="color: #fff;">Dashboard</button></a> 
+              </div>
+            </div>
+          </div>
+        </div>
 					</div>
 				</div>
+
+      
 				</div>
 			</div>
 		</section>
@@ -86,8 +103,9 @@ $test_code = $_REQUEST['test_code'];
     document.execCommand("copy");
 
     /* Alert the copied text */
-    alert("Copied the code: " + copyCode.value);
-    window.location.href="dashboard.php";
+    document.getElementById("modalCopyAlert").dataset.target ="#questionAlert";
+    document.getElementById("modalText").innerHTML= "Succesfuly copied" + " " + copyCode.value;
+  
    }
   </script>
 </body>

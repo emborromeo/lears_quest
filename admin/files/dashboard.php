@@ -73,11 +73,11 @@ if(!isset($_SESSION["user_id"]))
             <div class="card" style="min-height:400px;">
               <div class="card-header">
                 <div class="row">
-                  <div class="col-md-10 col-xs-12">
+                  <div class="col-4 col-md-9 col-xs-10">
                   <h5 class="title" style="float: left">Quizzes</h5>
 
                   </div>
-                  <div class="col-md-2 col-xs-12">
+                  <div class="col-6 col-md-3 col-xs-2">
                        <button class="role-form-btn admin-btn" onclick="redirect_to_new_test()" style="height: 2rem; width:140px;"> New Quiz</button>
                   </div>
                 </div>  

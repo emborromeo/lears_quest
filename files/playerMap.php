@@ -56,51 +56,65 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 		<link rel="stylesheet" type="text/css" href="../css/util.css">
 		<link rel="stylesheet" type="text/css" href="../css/main.css">
 		<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link href="//db.onlinewebfonts.com/c/d03165bd677535fe8da7479e26b13180?family=AzoSansUberW01-Regular" rel="stylesheet" type="text/css"/>
 		<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
 		<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 		<script src="../vendor/tilt/tilt.jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
-
+ 
+		<style>
+			#feedbackBg{
+background-size: 100% 100%;
+width: 25%;
+height: 50%;
+margin: auto;
+    margin-top: auto;
+margin-top: -80px;
+}
+		</style>
 	</head>
 
 <body style="display: flex;">
 <audio id="bgMusic" loop autoplay>
-  <source src="../images/map2.mp3" type="audio/mpeg" />
+  <source src="../assets/map2.mp3" type="audio/mpeg" />
 </audio>
-<div class="gameWrapper" >
+<div class="gameWrapper" style="background-image:url('../assets/BACKGROUNDS/map1blur.png')">
     <div class="mainHolder">
 		<div class="canvasHolder">
-			<div class="gameCanvas" style="width: 1024px; height:640px;">
+			<center>	
+			<div class="gameCanvas" style="background-image:url('../assets/BACKGROUNDS/MAP\ 1.png');">
 				<!-- ROW FOR SETTINGS-->
 				<div class="row" id="settingsRow" >
 					<div class="col-1">
-                    	<button id="backBtn" onclick="backBtn1()"><i class="fa fa-chevron-left  fa-sm" ></i> <b> Back</b> </button>
+                    	<button id="backBtn" onclick="backBtn1()"><img src="../assets/BUTTONS 2/back.png" alt="" width="40px"> </button>
 					</div>
 					<div class="col-6">
-						<img src="../images/point.png" id="star1" alt="" width="40px" > 
-						<img src="../images/point.png" id="star2" alt="" width="40px" >
-						<img src="../images/point.png" id="star3" alt="" width="40px" >
-						<img src="../images/point.png" id="star4"  alt="" width="40px" >
-						<img src="../images/point.png" id="star5"  alt="" width="40px" >
-						<img src="../images/point.png" id="star6"  alt="" width="40px" >
-						<img src="../images/point.png" id="star7"  alt="" width="40px" >
-						<img src="../images/point.png" id="star8"  alt="" width="40px" >
-						<img src="../images/point.png" id="star9"  alt="" width="40px" >
-						<img src="../images/point.png" id="star10"  alt="" width="40px" >	
+						<img src="../assets/BUTTONS 2/Stars.png" id="star1" alt="" width="40px" > 
+						<img src="../assets/BUTTONS 2/Stars.png"" id="star2" alt="" width="40px" >
+						<img src="../assets/BUTTONS 2/Stars.png" id="star3" alt="" width="40px" >
+						<img src="../assets/BUTTONS 2/Stars.png" id="star4"  alt="" width="40px" >
+						<img src="../assets/BUTTONS 2/Stars.png" id="star5"  alt="" width="40px" >
+						<img src="../assets/BUTTONS 2/Stars.png" id="star6"  alt="" width="40px" >
+						<img src="../assets/BUTTONS 2/Stars.png" id="star7"  alt="" width="40px" >
+						<img src="../assets/BUTTONS 2/Stars.png" id="star8"  alt="" width="40px" >
+						<img src="../assets/BUTTONS 2/Stars.png" id="star9"  alt="" width="40px" >
+						<img src="../assets/BUTTONS 2/Stars.png" id="star10"  alt="" width="40px" >	
 
 					</div>		
 					<div class="col-3">
-						<img src="../images/badge.png" id="badge1"  alt=""  width="40px" hidden>
-						<img src="../images/badge.png" id="badge2"  alt=""  width="40px" hidden>
-						<img src="../images/badge.png" id="badge3"  alt=""  width="40px" hidden>
-						<img src="../images/badge.png" id="badge4"  alt=""  width="40px" hidden>
-						<img src="../images/badge.png" id="badge5"  alt=""  width="40px" hidden>
+						<img src="../assets/BADGES/3X.png" id="badge3x"  alt=""  width="50px" >
+						<img src="../assets/BADGES/Faster.png" id="badgeFast"  alt=""  width="50px" >
+						<img src="../assets/BADGES/50.png" id="badge50"  alt=""  width="50px" >
+						<img src="../assets/BADGES/Finish.png" id="badgeFinish"  alt=""  width="50px" >
+						<img src="../assets/BADGES/Pass.png" id="badgePass"  alt=""  width="50px" >						
+						<img src="../assets/BADGES/100.png" id="badge100"  alt=""  width="50px" >
+						<img src="../assets/BADGES/Low Score.png" id="badgeLow"  alt=""  width="50px" >
+
 
 					</div>	
-					<div class="col-2">                        
-						<button id="musicBtn" onclick="pauseMusic1()"><i class="fa fa-music fa-2x"></i></button>  
-						<a href="studentLogout.php"> <i class="fa fa-sign-out fa-2x" style="color:#679847"> </i></a>
-
+					<div class="col-md-2">
+                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" width="40px" id="soundImg"> </button>
+                        <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" width="40px"> </i></a> 
 					</div>
 
 			 	</div>
@@ -108,11 +122,11 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 
 				<!-- ROW FOR MAP-->
                             		
-				<div class="row justify-content-md-center" id="gameMap" style="margin-left:0px">
+				<div class="row justify-content-center" id="gameMap" style="margin-left:0px">
 					<div class="container-quests">
 					<div class="row" style="margin: 30px;">
 							<div class="col-2">
-								<a href="#" id="quest10" class="button-quest ">10</a>					
+								<a href="#" id="quest10" >	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest10Btn"></a>					
 
 							</div>
 							<div class="col-2">
@@ -127,44 +141,44 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 
 							</div>
 							<div class="col-2" >
-								<a href="#"  id="quest9" class="button-quest" > 9</a>	</button>				
+								<a href="#"  id="quest9"> 	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest9Btn"></a>				
 
 							</div>
 					
 						</div>
 						<div class="row" style="margin: 30px;">
-							<div class="col-4">
-								<a href="#"  id="quest8" class="button-quest" disabled>8</a>					
+							<div class="col-4"> 
+								<a href="#"  id="quest8">	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest8Btn"></a>					
 
 							</div>
 							<div class="col-8">
-								<a href="#"  id="quest7" class="button-quest " style="margin-left: 40px;" disabled>7</a>	
+								<a href="#"  id="quest7"  style="margin-left: 40px;" >	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest7Btn"></a>	
 
 							</div>
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-3">
-								<a href="#" id="quest6"  class="button-quest" disabled>6</a>					
+								<a href="#" id="quest6" style="margin-right:100px 50px;">	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest6Btn"></a>					
 
 							</div>
 							<div class="col-6">
 
 							</div>	
 							<div class="col-3">
-								<a href="#"  id="quest5" class="button-quest " style="margin-right:100px 50px;" disabled>5</a>					
+								<a href="#"  id="quest5"  style="margin-right:100px 50px;">	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest5Btn"></a>					
 
 							</div>	
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-4">
-								<a href="#"  id="quest4" class="button-quest" style="margin-right:100px 50px;" disabled>4</a>					
+								<a href="#"  id="quest4"style="margin-right:100px 50px;" >	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest4Btn"></a>					
 
 							</div>
 							<div class="col-4">
 								
 							</div>	
 							<div class="col-4">
-								<a href="#"  id="quest3" class="button-quest"  style="margin-bottom: -50px;margin-left: 110px;" disabled>3</a>	
+								<a href="#"  id="quest3" style="margin-bottom: -50px;margin-left: 110px;" >	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest3Btn"></a>	
 
 							</div>	
 							<div class="col-4">
@@ -173,7 +187,7 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-2">
-								<a href="#"  id="quest2" class="button-quest "  style="margin-bottom:30px ;">2</a>					
+								<a href="#"  id="quest2"   style="margin-bottom:30px ;">	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest2Btn"></a>					
 
 							</div>
 							<div class="col-3">
@@ -186,7 +200,7 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 
 							</div>	
 							<div class="col-2">	
-								<a href="playerQuiz.php?id=<?php echo $row1["id"]; ?>"  id="quest1" class="button-quest" style="margin:30px ;">	1<img src="../images/boy.png" width="70px" hidden></a>	
+								<a href="questStory.php?id=<?php echo $row1["id"]; ?>"  id="quest1"  style="margin:30px ;"> 	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest1Btn"> </a>	
 							</div>
 						</div>
 	
@@ -195,27 +209,72 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 
 				</div>
 				<!-- ROW FOR INSTRUCTION-->	
-				<div class="row  justify-content-md-center" id="gameInstructions">	
+				<div class="row  justify-content-center" id="gameInstructions" >	
 					<div class="instructionHolder">
-						<img src="../images/lear.png" alt="" width="120px" id="lear">
-						<img src="../images/bar-sample.png" alt="" width="60%">
+					<!--	<img src="../assets/lear.png" alt="" width="120px" id="lear">-->
+						<img src="../assets/BOARDS/instruction-box.png" alt="" style="margin-top: -25px; width:35vw;">
 						<div class="instructionText">
 							<p class="story" id="welcomeText"> Welcome, young adventurer! </p> 
 							<p class="gameStory" id="story1"></p>
+							<p class="gameStory" id="story1a"></p>
 							<p class="gameStory" id="story2"></p>
-							<p class="gameStory" id="story3"></p>					
-							<button id="continueBtn" onclick="continueText()" style="display: inline;">Continue</button>
-							<a href="playerQuiz.php?id=<?php echo $row1["id"];?>"  id="toQuest1" style="display:none">Go to quest 1</a>
-							<a href="finalScorePage.php?code=<?php echo $ccode;?>"  id="finalScorePage" style="display:none">View Final Score</a>	
-	
+							<p class="gameStory" id="story2a"></p>
+							<p class="gameStory" id="story3"></p>
+							<p class="gameStory" id="story3a"></p>		
+							
+							<p id="dialogue"></p>					
+							<p class="story" id="dialogue1"></p>					
 
-						</div>						
+							<br>
+						<button id="continueBtn" onclick="continueText()" style="display: inline;"><img src="../assets/BUTTONS 2/next-btn.png" alt="" width="100vw"></button>
+						<a href="#"  id="viewBadge"><button id="nextBtn" onclick="nextBtn()" style="display: none;"><img src="../assets/BUTTONS 2/next-btn.png" alt="" width="100vw"></button></a> 
+						<a href="#"  id="finishBtn"><button id="finishBtn" onclick="finishBtn()" ><img src="../assets/BUTTONS 2/next-btn.png" alt="" width="100vw"></button></a> 
+						<a href="#"  id="remarksBtn"><button id="remarksBtn" onclick="remarksBtn()" ><img src="../assets/BUTTONS 2/next-btn.png" alt="" width="100vw"></button></a> 
+						<a href="#"  id="finalBtn"><button id="finalBtn" onclick="finalBtn()" ><img src="../assets/BUTTONS 2/next-btn.png" alt="" width="100vw"></button></a> 
 
+						<a href="questStory.php?id=<?php echo $row1["id"];?>"  id="toQuest1" style="display:none"><img src="../assets/BUTTONS 2/go-to-quest.png" width="140vw" alt=""> </a>
+						<a href="finalScorePage.php?code=<?php echo $ccode;?>"  id="finalScorePage" style="display:none"><img src="../assets/BUTTONS 2/view-score.png" width="140vw" alt=""></a>
 					</div>
+						</div>				
+	
 
 				</div>
 				
-			</div>
+			</div>	
+			</center>
+
+				<!--FEEDBACK MODAL-->
+				<div id="popup1" class="overlay">
+
+					<div id="feedbackBg">
+						<div class="popup">
+						<div class="content" style="margin-bottom: auto;margin-top: 220px;">		
+							<center><span id="feedbackTitle"></span> </center>
+
+							<center><p id="feedbackText">
+							</p> </center>
+
+							<div id="starPoints">
+						<!--	<center><img src="../assets/BUTTONS 2/Stars.png" id="star1" alt="" width="40px">  </center>-->
+
+							</div>
+
+							<div id="badgeAchievement">
+
+							</div>
+							<center><button onclick="nextBadge()" id="nextBadge"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  width="100vw" style="margin-top: 40px;"> </button></center>
+
+							<center><button onclick="hideBadge()" id="hideBadge"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  width="100vw" style="margin-top: 40px;"> </button></center>
+							<center><button onclick="finalBadge()" id="finalBadge"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  width="100vw" style="margin-top: 40px;"> </button></center>
+
+							<center style="padding: 10px;"><a href="finalScorePage.php?code=<?php echo $ccode;?>"  id="finalPageBtn" ><img src="../assets/BUTTONS 2/view-score.png" alt="" width="100vw"></a>	</center>
+
+						</div>
+					</div>
+					</div> 
+					
+				</div>
+
 		</div>
 
 	</div>
@@ -224,6 +283,23 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 		
 	
 <script>
+		document.getElementById("badge3x").style.display="none";
+		document.getElementById("badge50").style.display="none";
+		document.getElementById("badgeFast").style.display="none";
+		document.getElementById("badgeFinish").style.display="none";
+		document.getElementById("badgePass").style.display="none";
+		document.getElementById("badge100").style.display="none";
+		document.getElementById("badgeLow").style.display="none";
+		document.getElementById("nextBtn").style.display="none";
+		document.getElementById("finishBtn").style.display="none";
+		document.getElementById("nextBadge").style.display="none";
+		document.getElementById("remarksBtn").style.display="none";
+		document.getElementById("finalBadge").style.display="none";
+		document.getElementById("finalBtn").style.display="none";
+		document.getElementById("finalPageBtn").style.display="none";
+
+
+
 	/*let testTotal = <?php echo (int) ($testRow['total_questions']); ?>; 
    */
 	let testTotal  = <?php echo (int) ($rowTest['total_questions']); ?>; 
@@ -231,32 +307,43 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 	let currentScore  = <?php echo (int) ($rowStudent['score']); ?>; 
 	let currentProgress  = <?php echo (int) ($rowStudent['progress']); ?>; 
 
-
+    
 	function backBtn1(){
 		window.location.replace("playerStart.php");
 
 	}
-    function pauseMusic1(){
+    function pauseMusic(){
         let bgMusic= document.getElementById("bgMusic");
 
         if(bgMusic.paused) {
             bgMusic.play();
+			document.getElementById("soundImg").src="../assets/BUTTONS 2/sound-on.png";
+
+			
         }
         else {
             bgMusic.pause();
+			document.getElementById("soundImg").src="../assets/BUTTONS 2/sound-off.png";
         }
     }
 	let continueBtn= document.getElementById("continueBtn");
 	let firstParagraph = document.getElementById("welcomeText");
 	let pStory1 = document.getElementById("story1");
+	let pStory1a = document.getElementById("story1a");
 	let pStory2 = document.getElementById("story2");
+	let pStory2a = document.getElementById("story2a");
 	let pStory3 = document.getElementById("story3");
+	let pStory3a = document.getElementById("story3a");
 
 
-	let story1 = 'I am Lear, I have some great quests prepagray for young backpackers like you to train you as you take the journey of becoming the next generation of great adventurers.';
-	let story2 ='As you explore and conquer the quests, you will gain valuable knowledge and skills that will help you overcome more and harder challenges you will encounter as you go on your journey.';
-	let story3 = 'Now, are you ready to go on an adventure?  If you are, then LET\'S GO !!!';
-	let speed = 50;
+	let story1 = 'I am Lear, I have some great quests prepared for young backpackers like you...';
+	let story1a= 'to train you as you take the journey of becoming the next generation of adventurers!';
+	let story2 ='As you explore and conquer the quests, you will gain valuable knowledge & skills...';
+	let story2a='that will help you overcome more challenges you\'ll face as you go on your journey...';
+	let story3 = 'Now, are you ready to go on an adventure ???';
+	let story3a=' If you are, then LET\'S GO !!!';
+	
+	let speed =65;
 	let click=0;
 	let i = 0;
 
@@ -274,13 +361,26 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 		}
 		else if(click==2){
 			thirdPar();			
-			continueBtn.style.display="none";
-			toQuest1.style.display="inline";
+			
 			click=3;
 		}
 		else if(click==3){
-
+			fourthPar();			
+			click=4;
 		}
+
+		else if(click==4){
+			fifthPar();			
+			click=5;
+		}
+		
+		else if(click==5){
+			sixthPar();			
+			continueBtn.style.display="none";
+			toQuest1.style.display="inline";
+			click=6;
+		}
+		
 		
 	}	
 	function firstPar(){
@@ -299,9 +399,9 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 		firstParagraph.style.display="none";
 		pStory1.style.display="none";
 
-	  	if (i1 < story2.length) {
+	  	if (i1 < story1a.length) {
 		
-		pStory2.innerHTML += story2.charAt(i1);
+		pStory1a.innerHTML += story1a.charAt(i1);
 		i1++;
 		setTimeout(secondPar, speed);
 		}
@@ -312,13 +412,65 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 	function thirdPar(){
 		firstParagraph.style.display="none";
 		pStory1.style.display="none";
-		pStory2.style.display="none";
+		pStory1a.style.display="none";
 
-	  	if (i2 < story3.length) {
+	  	if (i2 < story2.length) {
 		
-		pStory3.innerHTML += story3.charAt(i2);
+		pStory2.innerHTML += story2.charAt(i2);
 		i2++;
 		setTimeout(thirdPar, speed);
+		}
+
+	}
+	let i3 = 0;
+
+	function fourthPar(){
+		firstParagraph.style.display="none";
+		pStory1.style.display="none";
+		pStory1a.style.display="none";
+
+		pStory2.style.display="none";
+
+	  	if (i3 < story2a.length) {
+		
+		pStory2a.innerHTML += story2a.charAt(i3);
+		i3++;
+		setTimeout(fourthPar, speed);
+		}
+
+	}	
+	let i4 = 0;
+
+	function fifthPar(){
+		firstParagraph.style.display="none";
+		pStory1.style.display="none";
+		pStory1a.style.display="none";
+		pStory2.style.display="none";
+		pStory2a.style.display="none";
+
+	  	if (i4 < story3.length) {
+		
+		pStory3.innerHTML += story3.charAt(i4);
+		i4++;
+		setTimeout(fifthPar, speed);
+		}
+
+	}	
+	let i5 = 0;
+
+	function sixthPar(){
+		firstParagraph.style.display="none";
+		pStory1.style.display="none";
+		pStory1a.style.display="none";
+		pStory2.style.display="none";
+		pStory2a.style.display="none";
+		pStory3.style.display="none";
+		
+	  	if (i5 < story3a.length) {
+		
+		pStory3a.innerHTML += story3a.charAt(i5);
+		i5++;
+		setTimeout(sixthPar, speed);
 		}
 
 	}
@@ -472,116 +624,140 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 		console.log("no quests"); 
 	}
 
+	let passingScore= testTotal * .75;
+	console.log(passingScore);
+
+//MAP PROGRESS
+
 	if(currentProgress==1){
-		document.getElementById("quest1").style.backgroundColor="gray";
+		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
 		document.getElementById("quest1").href = "#"; 
-		document.getElementById("quest2").href = "playerQuiz.php?id=<?php echo $row1["id"]+1; ?>"; 
+		document.getElementById("quest2Btn").src='../assets/BOARDS/location2.png';
+
+		document.getElementById("quest2").href = "questStory.php?id=<?php echo $row1["id"]+1; ?>"; 
 
 
 	}
 	else if(currentProgress==2){
-		document.getElementById("quest1").style.backgroundColor="gray";
-		document.getElementById("quest2").style.backgroundColor="gray";
+		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest2Btn").src='../assets/BOARDS/locationfailed.png';
 
 		document.getElementById("quest1").href = "#"; 
-		document.getElementById("quest3").href = "playerQuiz.php?id=<?php echo $row1["id"]+2; ?>"; 
+		document.getElementById("quest3Btn").src='../assets/BOARDS/location2.png';
+
+		document.getElementById("quest3").href = "questStory.php?id=<?php echo $row1["id"]+2; ?>"; 
 
 	}
 	else if(currentProgress==3){
-		document.getElementById("quest1").style.backgroundColor="gray";
-		document.getElementById("quest2").style.backgroundColor="gray";
-		document.getElementById("quest3").style.backgroundColor="gray";
+		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest2Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest3Btn").src='../assets/BOARDS/locationfailed.png';
+		
+		document.getElementById("quest4Btn").src='../assets/BOARDS/location2.png';
 
-		document.getElementById("quest4").href = "playerQuiz.php?id=<?php echo $row1["id"]+3; ?>"; 
+		document.getElementById("quest4").href = "questStory.php?id=<?php echo $row1["id"]+3; ?>"; 
 
 	}
 	else if(currentProgress==4){
-		document.getElementById("quest1").style.backgroundColor="gray";
-		document.getElementById("quest2").style.backgroundColor="gray";
-		document.getElementById("quest3").style.backgroundColor="gray";
-		document.getElementById("quest4").style.backgroundColor="gray";
+		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest2Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest3Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest4Btn").src='../assets/BOARDS/locationfailed.png';
 
 		document.getElementById("quest1").href = "#"; 
+		document.getElementById("quest5Btn").src='../assets/BOARDS/location2.png';
 
-		document.getElementById("quest5").href = "playerQuiz.php?id=<?php echo $row1["id"]+4; ?>"; 
+		document.getElementById("quest5").href = "questStory.php?id=<?php echo $row1["id"]+4; ?>"; 
 
 	}
 	else if(currentProgress==5){
-		document.getElementById("quest1").style.backgroundColor="gray";
-		document.getElementById("quest2").style.backgroundColor="gray";
-		document.getElementById("quest3").style.backgroundColor="gray";
-		document.getElementById("quest4").style.backgroundColor="gray";
-		document.getElementById("quest5").style.backgroundColor="gray";
+		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest2Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest3Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest4Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest5Btn").src='../assets/BOARDS/locationfailed.png';
 
-		document.getElementById("quest6").href = "playerQuiz.php?id=<?php echo $row1["id"]+5; ?>"; 
+		document.getElementById("quest6Btn").src='../assets/BOARDS/location2.png';
+
+		document.getElementById("quest6").href = "questStory.php?id=<?php echo $row1["id"]+5; ?>"; 
 
 		
 	}
 	else if(currentProgress==6){
-		document.getElementById("quest1").style.backgroundColor="gray";
-		document.getElementById("quest2").style.backgroundColor="gray";
-		document.getElementById("quest3").style.backgroundColor="gray";
-		document.getElementById("quest4").style.backgroundColor="gray";
-		document.getElementById("quest5").style.backgroundColor="gray";
-		document.getElementById("quest6").style.backgroundColor="gray";
+		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest2Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest3Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest4Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest5Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest6Btn").src='../assets/BOARDS/locationfailed.png';
 
-		document.getElementById("quest7").href = "playerQuiz.php?id=<?php echo $row1["id"]+6; ?>"; 
+		document.getElementById("quest7Btn").src='../assets/BOARDS/location2.png';
+
+		document.getElementById("quest7").href = "questStory.php?id=<?php echo $row1["id"]+6; ?>"; 
 
 	}
 	else if(currentProgress==7){
-		document.getElementById("quest1").style.backgroundColor="gray";
-		document.getElementById("quest2").style.backgroundColor="gray";
-		document.getElementById("quest3").style.backgroundColor="gray";
-		document.getElementById("quest4").style.backgroundColor="gray";
-		document.getElementById("quest5").style.backgroundColor="gray";
-		document.getElementById("quest6").style.backgroundColor="gray";
-		document.getElementById("quest7").style.backgroundColor="gray";
+		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest2Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest3Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest4Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest5Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest6Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest7Btn").src='../assets/BOARDS/locationfailed.png';
 
-		document.getElementById("quest8").href = "playerQuiz.php?id=<?php echo $row1["id"]+7; ?>"; 
+		document.getElementById("quest8Btn").src='../assets/BOARDS/location2.png';
+
+		document.getElementById("quest8").href = "questStory.php?id=<?php echo $row1["id"]+7; ?>"; 
 
 	}
 	else if(currentProgress==8){
-		document.getElementById("quest1").style.backgroundColor="gray";
-		document.getElementById("quest2").style.backgroundColor="gray";
-		document.getElementById("quest3").style.backgroundColor="gray";
-		document.getElementById("quest4").style.backgroundColor="gray";
-		document.getElementById("quest5").style.backgroundColor="gray";
-		document.getElementById("quest6").style.backgroundColor="gray";
-		document.getElementById("quest7").style.backgroundColor="gray";
-		document.getElementById("quest8").style.backgroundColor="gray";
+		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest2Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest3Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest4Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest5Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest6Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest7Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest8Btn").src='../assets/BOARDS/locationfailed.png';
 
-		document.getElementById("quest9").href = "playerQuiz.php?id=<?php echo $row1["id"]+8; ?>"; 
+		document.getElementById("quest9Btn").src='../assets/BOARDS/location2.png';
+
+		document.getElementById("quest9").href = "questStory.php?id=<?php echo $row1["id"]+8; ?>"; 
 
 	}
 	else if(currentProgress==9){
-		document.getElementById("quest1").style.backgroundColor="gray";
-		document.getElementById("quest2").style.backgroundColor="gray";
-		document.getElementById("quest3").style.backgroundColor="gray";
-		document.getElementById("quest4").style.backgroundColor="gray";
-		document.getElementById("quest5").style.backgroundColor="gray";
-		document.getElementById("quest6").style.backgroundColor="gray";
-		document.getElementById("quest7").style.backgroundColor="gray";
-		document.getElementById("quest8").style.backgroundColor="gray";
-		document.getElementById("quest9").style.backgroundColor="gray";
+		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest2Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest3Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest4Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest5Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest6Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest7Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest8Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest9Btn").src='../assets/BOARDS/locationfailed.png';
 
-		document.getElementById("quest10").href = "playerQuiz.php?id=<?php echo $row1["id"]+9; ?>"; 
+		document.getElementById("quest10Btn").src='../assets/BOARDS/location2.png';
+
+		document.getElementById("quest10").href = "questStory.php?id=<?php echo $row1["id"]+9; ?>"; 
 
 	}
 	else if(currentProgress==10){
-		document.getElementById("quest1").style.backgroundColor="gray";
-		document.getElementById("quest2").style.backgroundColor="gray";
-		document.getElementById("quest3").style.backgroundColor="gray";
-		document.getElementById("quest4").style.backgroundColor="gray";
-		document.getElementById("quest5").style.backgroundColor="gray";
-		document.getElementById("quest6").style.backgroundColor="gray";
-		document.getElementById("quest7").style.backgroundColor="gray";
-		document.getElementById("quest8").style.backgroundColor="gray";
-		document.getElementById("quest9").style.backgroundColor="gray";
-		document.getElementById("quest10").style.backgroundColor="gray";
+		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest2Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest3Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest4Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest5Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest6Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest7Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest8Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest9Btn").src='../assets/BOARDS/locationfailed.png';
+		document.getElementById("quest10Btn").src='../assets/BOARDS/locationfailed.png';
 
 
 	}
 	else{
+		document.getElementById("quest1Btn").src='../assets/BOARDS/location2.png';
+
 		document.getElementById("quest2").href = "#"; 
 		document.getElementById("quest3").href = "#"; 
 		document.getElementById("quest4").href = "#"; 
@@ -593,15 +769,201 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 		document.getElementById("quest10").href = "#"; 
 
 	}
+
+
 	if(currentProgress>=1){
 		document.getElementById("welcomeText").style.display="none";
 		document.getElementById("continueBtn").style.display="none";
 
 	}
 	if(currentProgress==testTotal){
-		document.getElementById("finalScorePage").style.display="inline";
+	//	document.getElementById("finalScorePage").style.display="inline";
 
 	}
+
+   
+
+	let halfWay = testTotal /2;
+	console.log(halfWay);
+
+	if(currentProgress==halfWay){
+		document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb50.png')";
+
+		document.getElementById("dialogue").innerHTML="Congratulations! ";
+		document.getElementById("dialogue1").innerHTML=" You're halfway through all the quest !";
+		document.getElementById("nextBtn").style.display="inline"
+
+		console.log("Halfway to complete the quests")
+	}
+	
+	
+	function nextBtn(){
+		document.getElementById("viewBadge").href="#popup1";
+		document.getElementById("gameInstructions").style.display="none";
+
+	}
+	function hideBadge(){
+		document.getElementById("popup1").style.display="none";
+		document.getElementById("gameInstructions").style.display="inline";
+
+		document.getElementById("dialogue").innerHTML="Continue your journey! ";
+		document.getElementById("dialogue1").style.display="none";
+		document.getElementById("nextBtn").style.display="none";		  
+		document.getElementById("badge50").style.display="inline";
+
+	
+	} 
+		if(currentProgress>halfWay){
+			document.getElementById("badge50").style.display="inline";
+
+		}
+	
+	if(currentProgress==testTotal){
+		document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb-finish.png')";
+
+		document.getElementById("dialogue").innerHTML="Congratulations! ";
+		document.getElementById("dialogue1").innerHTML="You have finished all the quests !";
+		document.getElementById("finishBtn").style.display="inline"
+		document.getElementById("badge").style.display="inline";
+
+
+
+	}
+	function finishBtn(){
+		document.getElementById("finishBtn").href="#popup1";
+		document.getElementById("gameInstructions").style.display="none";
+		document.getElementById("hideBadge").style.display="none";
+		document.getElementById("nextBadge").style.display="inline";
+
+
+
+	}
+	function nextBadge(){
+		if(currentScore>=passingScore){		
+			document.getElementById("badgeFinish").style.display="inline";
+
+				console.log("You passed");
+				document.getElementById("gameInstructions").style.display="inline";
+				document.getElementById("popup1").style.display="none";
+				document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb-pass.png')";
+
+
+				document.getElementById("dialogue").innerHTML="You Passed ! ";
+				document.getElementById("nextBtn").style.display="none";
+				document.getElementById("finishBtn").style.display="none";
+				document.getElementById("dialogue1").style.display="none";
+				document.getElementById("remarksBtn").style.display="inline";
+
+
+			}
+			else if(currentScore<passingScore){
+				document.getElementById("badgeFinish").style.display="inline";
+
+				document.getElementById("gameInstructions").style.display="inline";
+				document.getElementById("popup1").style.display="none";
+				document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb-low.png')";
+
+				console.log("Low Score")
+				document.getElementById("dialogue").innerHTML="You did not pass! ";
+
+				document.getElementById("badgeLow").style.display="inline";
+
+				document.getElementById("nextBtn").style.display="none";
+				document.getElementById("finishBtn").style.display="none";
+				document.getElementById("dialogue1").style.display="none";
+				document.getElementById("remarksBtn").style.display="inline";
+
+			}
+		
+			else{
+				console.log("Error");
+			}
+		
+	}
+
+	function remarksBtn(){
+		if(currentScore>=passingScore){		
+		document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb-pass.png')";
+		document.getElementById("popup1").style.display="inline";
+
+		document.getElementById("remarksBtn").href="#popup1";
+		document.getElementById("gameInstructions").style.display="none";
+		document.getElementById("hideBadge").style.display="none";
+		document.getElementById("nextBadge").style.display="none";
+		document.getElementById("finalBadge").style.display="inline";
+		} else if(currentScore<passingScore){
+			document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb-low.png')";
+		document.getElementById("popup1").style.display="inline";
+
+		document.getElementById("remarksBtn").href="#popup1";
+		document.getElementById("gameInstructions").style.display="none";
+		document.getElementById("hideBadge").style.display="none";
+		document.getElementById("nextBadge").style.display="none";
+		document.getElementById("finalBadge").style.display="none";
+		document.getElementById("finalBtn").style.display="none";
+		document.getElementById("finalPageBtn").style.display="inline";
+
+		}
+
+	}
+
+	function finalBadge(){				
+		document.getElementById("badgePass").style.display="inline";
+
+		if(currentScore==testTotal){
+				document.getElementById("gameInstructions").style.display="inline";
+				document.getElementById("popup1").style.display="none";
+
+				console.log("Perfect Score")
+				document.getElementById("badgeFinish").style.display="inline";
+
+				document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb100.png')";
+
+				document.getElementById("dialogue").innerHTML=" You conquered all the quests!";
+				document.getElementById("dialogue1").style.display="inline";
+				document.getElementById("dialogue1").innerHTML="You got a perfect score";
+				
+				document.getElementById("nextBtn").style.display="none";
+				document.getElementById("finishBtn").style.display="none";
+				document.getElementById("remarksBtn").style.display="none";
+				document.getElementById("finalBtn").style.display="inline";
+
+
+			}
+
+		else{
+			document.getElementById("popup1").style.display="none";
+			document.getElementById("dialogue").style.display="none";
+			document.getElementById("finalBadge").style.display="none";
+			document.getElementById("nextBtn").style.display="none";
+			document.getElementById("remarksBtn").style.display="none";
+
+			document.getElementById("gameInstructions").style.display="inline";
+
+			document.getElementById("finalScorePage").style.display="inline";
+
+		}
+	}
+	function finalBtn(){	
+		document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb100.png')";
+			
+		document.getElementById("badge100").style.display="inline";
+
+		document.getElementById("popup1").style.display="inline";
+
+		document.getElementById("finalBtn").href="#popup1";
+		document.getElementById("gameInstructions").style.display="none";
+		document.getElementById("hideBadge").style.display="none";
+		document.getElementById("nextBadge").style.display="none";
+		document.getElementById("finalBadge").style.display="none";
+		document.getElementById("finalPageBtn").style.display="inline";
+
+
+	}
+
+	/*
+		else 
+	*/
 </script>
 
 </body>

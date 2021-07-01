@@ -30,35 +30,37 @@ $_SESSION['code'] = $resultCode;
 
 <body>
 <audio id="bgMusic" loop autoplay>
-  <source src="../images/map2.mp3" type="audio/mpeg" />
+  <source src="../assets/map2.mp3" type="audio/mpeg" />
 </audio>
 <div class="gameWrapper" >
     <div class="mainHolder">
 		<div class="canvasHolder">
-        	<div class="gameCanvas" style="width: 1024px; height:640px;">
+			<center>
+        	<div class="gameCanvas" style="background-image:url('../assets/BACKGROUNDS/2.png');">
         		<div class="row" id="settingsRow" >
 					<div class="col-md-10">
                     <button id="backBtn" hidden ><i class="fa fa-chevron-left  fa-lg" hidden></i> Back</button>
 					</div>
 
 					<div class="col-md-2">
-                        <button id="musicBtn" onclick="pauseMusic()"><i class="fa fa-music fa-2x"></i></button>
-                        <a href="studentLogout.php"> <i class="fa fa-sign-out fa-2x" style="color:#679847"> </i></a> 
+                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" width="40px" id="soundImg"> </button>
+                        <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" width="40px"> </i></a> 
 					</div>
 
 			 	</div>
-				<div class="row justify-content-md-center">
+				<div class="row justify-content-center" style="display: contents;">
 
 					<div class="col-12" style="display:contents">
-						<img src="../images/title-sample1.png" alt="" style="width: 50%">
-					</div>
+						<center><img src="../assets/TITLE/title-start	.png" alt="" style="width: 60vw"> </center>
+					</div> <br>  	
 
 					<div class="col-12"  style="display:contents">
-                        <a href="playerMap.php?quiz_code=<?php echo $resultCode;?>"> <button class="role-form-bn"> <img src="../images/btn-start.png" alt="" style="width: 20%;"></button></a>
+                        <center> <a href="playerMap.php?quiz_code=<?php echo $resultCode;?>"> <button class="role-form-bn"> <img src="../assets/BUTTONS 2/start-btn.png" alt="" style="width: 20vw" id="startBtn"></button></a></center>
 					</div>
 				</div>
 
-			</div>
+			</div> 
+		</center>
 		</div>
 
 	</div>
@@ -77,9 +79,13 @@ $_SESSION['code'] = $resultCode;
 
         if(bgMusic.paused) {
             bgMusic.play();
+			document.getElementById("soundImg").src="../assets/BUTTONS 2/sound-on.png";
+
+			
         }
         else {
             bgMusic.pause();
+			document.getElementById("soundImg").src="../assets/BUTTONS 2/sound-off.png";
         }
     }
 </script>

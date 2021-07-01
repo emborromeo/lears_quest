@@ -16,7 +16,6 @@
 		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 		<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-		<script src="vendor/tilt/tilt.jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
 
 	</head>

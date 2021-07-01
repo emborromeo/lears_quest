@@ -49,6 +49,13 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
   */	
   
 
+    $chosenQuest = (int) $row1['quest_id'];
+     
+    //getting quest info
+    $queryQuest = "SELECT * FROM tbl_quest WHERE quest_id = $chosenQuest";
+    $resultQuest = mysqli_query($conn,$queryQuest);
+    $rowQuest = mysqli_fetch_assoc($resultQuest);
+
 ?>
 
 
@@ -65,23 +72,8 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 	
 	<style>
 	
-.overlay {
-	
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
-}
-.overlay:target {
-  visibility: visible;
-  opacity: 1;
-}
+
 #feedbackBg{
-	background-image: url('../images/bar-sample.png');
 background-size: 100% 100%;
 width: 25%;
 height: 50%;
@@ -89,37 +81,16 @@ margin: auto;
     margin-top: auto;
 margin-top: -50px;
 }
+#minutes, #seconds, #colon{
+    color: #723c29;
+  font-size: 3.5vw;
+  font-family: AzoSans;
 
-.popup {
-  margin: 250px auto;
-  padding: 20px;
-  background: transparent;
-  border-radius: 5px;
-  width: 90%;
-  position: relative;
-  transition: all 5s ease-in-out;
-}
-
-.popup span {
-  margin-top: 0;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
-}
-
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
-
-@media screen and (max-width: 700px){
-  .box{
-    width: 70%;
   }
-  .popup{
-    width: 70%;
+  #timer{
+    margin-top: 20px;
   }
-}
-		
+
 	</style>
 
 	</head>
@@ -128,72 +99,75 @@ margin-top: -50px;
 <div class="gameWrapper" >
     <div class="mainHolder">
 		<div class="canvasHolder">
-			<div class="gameCanvas" style="width: 1024px; height:640px;">
+      <center>
+			<div class="gameCanvas" id="gameCanvas">
 				<!-- ROW FOR SETTINGS-->
-			    <div class="row" id="settingsRow" >
+			    <div class="row justify-content-between" id="settingsRow" >
 
-					<div class="col-md-10">
-						<button id="backBtn"><i class="fa fa-chevron-left  fa-lg"></i> Back </button>
+					<div class="col-1">
+          <button id="backBtn" onclick="backBtn1()"><img src="../assets/BUTTONS 2/back.png" alt="" width="40px"> </button>
 					</div>
 
-					<div class="col-md-2">
-                        <button id="musicBtn"><i class="fa fa-music fa-2x"></i></button>
-                        <button id="logoutBtn"><i class="fa fa-sign-out fa-2x"></i> </button>
+					<div class="col-2">
+            <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" width="40px" id="soundImg"> </button>
+             <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" width="40px"> </i></a> 
 					</div>
 
 			    </div>
 				<!-- ROW FOR GAME INFO - PROGRESS BAR, SCORE, BADGES -->
-				<div class="row justify-content-md-center" id="gameInfo" >
+				<div class="row justify-content-center" id="gameInfo" >
 				<!--PROGRESS BAR-->
 				</div>
 
 				<!-- ROW QUESTION-->
-
-				<div class="row justify-content-md-center" id="gameMap" style="margin-left:0px">
-					<div class="container-quiz">
-              <div class="row justify-content-md-center">
+     
+				<div class="row justify-content-center" id="gameMap" style="margin-left:0px">
+					    <center><div class="container-quiz" style="background-image: url('../assets/BOARDS/quest-box.png');width:80vw;margin-top:-50px">
+              <div class="row justify-content-center">
                   <span id="question"><?= $row1["question_text"];?></span>
               </div> <br> 
                 <input type="hidden" name="save_score">
-                <div class="quiz " id="quiz" >     
-                      
-                    <div id="optionA" class="element-animation1 btn btn-lg btn-choice"><input type="radio" name="q_answer" value="A">&nbsp;<?= $row1["optionA"];?></div> <br>
-                    <div id="optionB" class="element-animation1 btn btn-lg btn-choice" ><input type="radio" name="q_answer" value="B" >&nbsp;<?= $row1["optionB"];?></div>
+                <div class="quiz " id="quiz" style="width: 90vw;">  
+                  <div id="timer">
+                     <span id="minutes" >00</span><span id="colon">:</span><span id="seconds">00</span>
+                  </div>   
+
+                    <div id="optionA" class="element-animation1 btn btn-lg btn-choice"><input type="radio" name="q_answer" value="A"><span class="quest-choices" >&nbsp;<?= $row1["optionA"];?></span> </div> <br>
+                    <div id="optionB" class="element-animation1 btn btn-lg btn-choice" ><input type="radio" name="q_answer"  value="B" ><span class="quest-choices" >&nbsp;<?= $row1["optionB"];?></span></div>
                     <br>
                           
-                    <div id="optionC" class="element-animation1 btn btn-lg btn-choice"><input type="radio" name="q_answer" value="C">&nbsp;<?= $row1["optionC"];?></div> <br>
-                    <div id="optionD" class="element-animation1 btn btn-lg btn-choice"> <input type="radio" name="q_answer" value="D" >&nbsp;<?= $row1["optionD"];?></div>
+                    <div id="optionC" class="element-animation1 btn btn-lg btn-choice"><input type="radio" name="q_answer" class="quest-choices" value="C"><span class="quest-choices" >&nbsp;<?= $row1["optionC"];?></span></div> <br>
+                    <div id="optionD" class="element-animation1 btn btn-lg btn-choice"> <input type="radio" name="q_answer" class="quest-choices" value="D" ><span class="quest-choices" >&nbsp;<?= $row1["optionD"];?></span></div>
                     <br>
 
-                    <div class="row justify-content-md-center">
-                        <a class="button" href="#popup1"> <button class="role-form-bn" onclick="submitAnswer()"> <img src="../images/submit.png" alt="" style="width: 20%;"></button></a>
+                    <div class="row justify-content-center">
+                        <a class="button" href="#popup1"> <button class="role-form-bn" onclick="submitAnswer()"> <img src="../assets/BUTTONS 2/submit-btn.png" alt="" width="140vw"></button></a>
                     </div>
 				      	</div>
-					</div>
-
+					</div>  
+</center>
 			</div>
-            
+        </center>     
 			<!--FEEDBACK MODAL-->
 				<div id="popup1" class="overlay">
 
 					<div id="feedbackBg">
 						<div class="popup">
-						<div class="content">		
-							<span id="feedbackTitle">Feedback</span>
+						<div class="content" style="margin-bottom: auto;margin-top: 220px;">		
+							<center><span id="feedbackTitle"></span> </center>
 
-							<p id="feedbackText">
-								Feedback
-							</p>
+							<center><p id="feedbackText">
+							</p> </center>
 
 							<div id="starPoints">
-							<img src="../images/point.png" id="start1" alt="" width="40px"> 
+						<!--	<center><img src="../assets/BUTTONS 2/Stars.png" id="star1" alt="" width="40px">  </center>-->
 
 							</div>
 
 							<div id="badgeAchievement">
 
-							</div>
-							<a href="playerMap.php?quiz_code=<?php echo $code;?>"><button> Continue</button></a>
+							</div> 
+							<center> <a href="playerMap.php?quiz_code=<?php echo $code;?>" id="continueMap"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  width="100vw"> </a></center>
 						</div>
 					</div>
 					</div> 
@@ -207,7 +181,7 @@ margin-top: -50px;
 		</div>
 
 	</div>
-</div>
+
 		
 
 		
@@ -216,9 +190,58 @@ margin-top: -50px;
 <script src="../vendor/tilt/tilt.jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
 
-<script type="text/javascript">
-    let answer  = <?php echo json_encode ($row1['correctAns']); ?>; 
+<script type="text/javascript">// I'm sure theres a million and one much easier ways to do this! But here's how I made it work!
+let minutesLabel = document.getElementById("minutes");
+        let secondsLabel = document.getElementById("seconds");
+        let totalSeconds = 0;
+        setInterval(setTime, 1000);
 
+        function setTime()
+        {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds%60);
+            minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+        }
+
+        function pad(val)
+        {
+          let valString = val + "";
+            if(valString.length < 2)
+            {
+                return "0" + valString;
+            }
+            else
+            {
+                return valString;
+            }
+        }
+
+
+function getTime(){
+  let timetry  = document.getElementById("seconds").value;
+  console.log(timetry);
+}
+
+  let answer  = <?php echo json_encode ($row1['correctAns']); ?>; 
+  
+  document.getElementById("gameCanvas").style.backgroundImage="url('<?php echo $rowQuest['img_path']; ?>')";
+
+
+  function backBtn1(){
+      
+	}
+  function pauseMusic(){
+        let bgMusic= document.getElementById("bgMusic");
+
+        if(bgMusic.paused) {
+          bgMusic.play();
+			    document.getElementById("soundImg").src="../assets/BUTTONS 2/sound-on.png";
+        }
+        else {
+          bgMusic.pause();
+			    document.getElementById("soundImg").src="../assets/BUTTONS 2/sound-off.png";
+        }
+    }
   function submitAnswer(){    
 
     let getSelectedAnswer =document.querySelector('input[name="q_answer"]:checked');   
@@ -230,24 +253,19 @@ margin-top: -50px;
     let feedbackTitle = document.getElementById("feedbackTitle");
     let feedbackText = document.getElementById("feedbackText");
 
-    if(answer==selectedAnswer){
+    if(answer==selectedAnswer){ 
   //pasas to update score
   //enable next queston
-      feedbackTitle.innerHTML = "CORRECT"
-      feedbackText.innerHTML = "Yey! Congrats"
+      document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/correct2.png')";
       console.log("correct");
-    /*
-      <?php $score=$scoreCounter++;?>
-      let score = <?php echo (int) $score;?>;
-      console.log(score);
+      feedbackText.innerHTML = "       ";
 
-    */
-    updateScore();
+      updateScore();
     }
     else{
-      feedbackTitle.innerHTML = "AW, WRONG"
-      feedbackText.innerHTML = "The correct answer is " + answer;
-      console.log("wrong")
+      document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/wrong1.png')";
+      feedbackText.innerHTML = "The answer is " + answer;
+      console.log(answer)
       updateProgress();
     }
 
@@ -272,12 +290,12 @@ margin-top: -50px;
       url: "student_test_progress.php",
       type: "POST",
       data:{
-      "currrent_student":studentid1}
+      "currrent_student1":studentid1}
     })
 
    }
 
- 
+
 
 </script>
 </body>

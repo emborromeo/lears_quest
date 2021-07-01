@@ -49,7 +49,10 @@ if(!isset($_SESSION["user_id"]))
     $test_details = mysqli_fetch_assoc($result);
 
   }
-
+  
+$questionsAdded = "SELECT * FROM question_test_mapping WHERE test_id=$test_id";
+  $questionsAddedResult = mysqli_query($conn,$questionsAdded);
+	$questionsAddedRow = mysqli_num_rows($questionsAddedResult);
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +65,7 @@ if(!isset($_SESSION["user_id"]))
   <meta http-equiv="pragma" content="no-cache" />
   <meta http-equiv="expires" content="-1" />
   <title>
-    <?=ucfirst(basename($_SERVER['PHP_SELF'], ".php"));?>
+   Quiz Info
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -186,96 +189,109 @@ if(!isset($_SESSION["user_id"]))
                   </form>
              
                   <div class="col-md-6">
-                    <button class="role-form-btn" onclick="redirect_to_add_question()" style="margin-top:0px;width:200px !important;float:right !important;">ADD QUESTION</button>
+                  <a href="#" data-toggle="modal" data-target="#" id="modalQuestionAlert"> <button class="role-form-btn" onclick="redirect_to_add_question()" id="addQuestion" style="margin-top:0px;width:200px !important;float:right !important;">ADD QUESTION</button></a>
                   </div>
                 </div>  
               </div>
               <div class="card-body">
-              <div class="table-responsive">
-              
+                <div class="table-responsive">
+                
 
-                <table id="question_list" class="table table-striped table-bordered" style="width:100%">
-                      <thead>
-                          <tr>
-                              <th>#</th>
-                              <th>Question</th>
-                              <th>Option(A)</th>
-                              <th>Option(B)</th>
-                              <th>Option(C)</th>
-                              <th>Option(D)</th>
-                              <th>Answer</th>
-                              <th colspan="2">Action</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                      
-                          <?php
-                            $sql = "select question_id from question_test_mapping where test_id = $test_id";
-                            $result = mysqli_query($conn,$sql);
-                            $i = 1;
-                            while($row = mysqli_fetch_assoc($result)) {
-                              $question_id = $row["question_id"];
-                              $sql1 = "select * from tbl_questions where id = $question_id";
-                              $result1 = mysqli_query($conn,$sql1);
-                              $row1 = mysqli_fetch_assoc($result1);
-
-                              ?>
-                              <tr id = "<?= $row1["id"]; ?>">
-
-
-                                <input type="hidden" id="question_id" value="<?= $row1["id"]; ?>">
-                                <td><?=$i?>.</td>
-                                <td><?=$row1["question_text"]?></td>
-                                <td><?= $row1["optionA"];?> </td>
-                                <td><?= $row1["optionB"];?></td>
-                                <td><?= $row1["optionC"];?></td>
-                                <td><?= $row1["optionD"];?></td>
-                                <td><?= $row1["correctAns"];?></td>
-                                
-
-                                <!--<td><button id="update" name="update" class="role-form-btn update" onclick="update_question('<?= $row1["id"]; ?>')"><i class="fa fa-save"></i></button></td>-->
-                                <td><a href="updateQuestionPage.php?id=<?php echo $row1["id"]; ?>"><i class="fa fa-edit fa-lg"></i></a></td>
-                                <td><a onclick="delete_question('<?= $row1["id"]; ?>','<?php echo $test_id; ?>')" id="delete" name="delete"><i class="fa fa-trash fa-lg"></i></a> </td>
-                              </tr>
-
+                  <table id="question_list" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Question</th>
+                                <th>Option(A)</th>
+                                <th>Option(B)</th>
+                                <th>Option(C)</th>
+                                <th>Option(D)</th>
+                                <th>Answer</th>
+                                <th colspan="2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
                             <?php
-                            $i++;
-                            }    
-                          ?>
-                          <!--
-                          <?php
-                              $questionID= $row1["id"];
-                              if(isset($_POST['questions_update'])) {
-                                $test_id = $_POST['test_id'];
-                                $quest_text = $_POST['questionText'];
-                                $opt_A = $_POST['choiceA'];
-                                $opt_B = $_POST['choiceB'];
-                                $opt_C = $_POST['choiceC'];
-                                $opt_D = $_POST['choiceD'];
-                                $answer = $_POST['choiceD'];                          
-                              
-                                $sql = "UPDATE tbl_questions SET question_text  = '$quest_text', optionA  = '$opt_A', optionB  = '$opt_B', optionC  = '$opt_C', optionD  = '$opt_D, correctAns  = '$answer' WHERE id = '$questionID'";
-                                $result = mysqli_query($conn,$sql);
-                              
-                              }
-                          ?>-->
-                      </tbody>
-                    </table>
-                          
-              </div>
+                              $sql = "select question_id from question_test_mapping where test_id = $test_id";
+                              $result = mysqli_query($conn,$sql);
+                              $i = 1;
+                              while($row = mysqli_fetch_assoc($result)) {
+                                $question_id = $row["question_id"];
+                                $sql1 = "select * from tbl_questions where id = $question_id";
+                                $result1 = mysqli_query($conn,$sql1);
+                                $row1 = mysqli_fetch_assoc($result1);
+
+                                ?>
+                                <tr id = "<?= $row1["id"]; ?>">
+
+
+                                  <input type="hidden" id="question_id" value="<?= $row1["id"]; ?>">
+                                  <td><?=$i?>.</td>
+                                  <td><?=$row1["question_text"]?></td>
+                                  <td><?= $row1["optionA"];?> </td>
+                                  <td><?= $row1["optionB"];?></td>
+                                  <td><?= $row1["optionC"];?></td>
+                                  <td><?= $row1["optionD"];?></td>
+                                  <td><?= $row1["correctAns"];?></td>
+                                  
+
+                                  <!--<td><button id="update" name="update" class="role-form-btn update" onclick="update_question('<?= $row1["id"]; ?>')"><i class="fa fa-save"></i></button></td>-->
+                                  <td><a href="updateQuestionPage.php?id=<?php echo $row1["id"]; ?>"><i class="fa fa-edit fa-lg"></i></a></td>
+                                  <td><a onclick="delete_question('<?= $row1["id"]; ?>','<?php echo $test_id; ?>')" id="delete" name="delete"><i class="fa fa-trash fa-lg"></i></a> </td>
+                                </tr>
+
+                              <?php
+                              $i++;
+                              }    
+                            ?>
+                            <!--
+                            <?php
+                                $questionID= $row1["id"];
+                                if(isset($_POST['questions_update'])) {
+                                  $test_id = $_POST['test_id'];
+                                  $quest_text = $_POST['questionText'];
+                                  $opt_A = $_POST['choiceA'];
+                                  $opt_B = $_POST['choiceB'];
+                                  $opt_C = $_POST['choiceC'];
+                                  $opt_D = $_POST['choiceD'];
+                                  $answer = $_POST['choiceD'];                          
+                                
+                                  $sql = "UPDATE tbl_questions SET question_text  = '$quest_text', optionA  = '$opt_A', optionB  = '$opt_B', optionC  = '$opt_C', optionD  = '$opt_D, correctAns  = '$answer' WHERE id = '$questionID'";
+                                  $result = mysqli_query($conn,$sql);
+                                
+                                }
+                            ?>-->
+                        </tbody>
+                      </table>
+                            
+                </div>
               </div>
             </div>
           </div>
+
+          <div class="modal fade" id="questionAlert" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+              <div class="modal-body">
+                <span id="modalText"></span>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="role-form-btn" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         </div> <br>
 
         <div class="row">
           <div class="container" style="width: 15rem"> 
-          <a href="publishPage.php?test_code=<?php echo $test_details["generatedCode"]; ?>"><button class="role-form-btn" >Publish</button></a> 
+        <button class="role-form-btn" onclick="publishQuiz()">Publish</button>
           </div>
         </div>
       </div>
-
-
 
     
   </div>
@@ -290,8 +306,27 @@ if(!isset($_SESSION["user_id"]))
 
 <script>
 
+    let questionSet = <?php echo (int) ($test_details["total_questions"]);?>;
+    let questionAdded = <?php echo (int) ($questionsAddedRow);?>;
+    let id = <?php echo (int) ($test_id);?>;
+
+
+    console.log(questionAdded);
+    console.log(questionSet);
+    console.log("id");
+
+
     function redirect_to_add_question() {
-      document.getElementById("form-add-questions").submit();
+      if(questionSet==questionAdded){
+     
+        //this should be modal
+        document.getElementById("modalQuestionAlert").dataset.target ="#questionAlert";
+        document.getElementById("modalText").innerHTML= "You have reached the set number of questions";
+      }
+      else{
+        document.getElementById("form-add-questions").submit();
+
+      }
     }
 
 
@@ -313,99 +348,23 @@ if(!isset($_SESSION["user_id"]))
           }
       });
     }
-
-      /*
-$(document).ready(function(){  
-     $('#question_list').Tabledit({
-      url:'update_question.php',
-      columns:{
-       identifier:[0, "id"],
-       editable:[[1, 'question_text'], [2, 'optionA'], [3, 'optionB'] ,[4, 'optionC'], [5, 'optionD'] [6, 'correctAns']]
-      },
-      restoreButton:false,
-      onSuccess:function(data, textStatus, jqXHR)
-      {
-       if(data.action == 'delete')
-       {
-        $('#'+data.id).remove();
-       }
-      },
-      buttons: {
-    edit: {
-        class: 'btn btn-sm btn-default',
-        html: '<span class="glyphicon glyphicon-pencil"></span>',
-        action: 'edit'
-    },
-    delete: {
-        class: 'btn btn-sm btn-default',
-        html: '<span class="glyphicon glyphicon-trash"></span>',
-        action: 'delete'
-    },
-    save: {
-        class: 'btn btn-sm btn-success',
-        html: 'Save'
-    },
-    restore: {
-        class: 'btn btn-sm btn-warning',
-        html: 'Restore',
-        action: 'restore'
-    },
-    confirm: {
-        class: 'btn btn-sm btn-danger',
-        html: 'Confirm'
-    }
-     });
-    });
-
    
-    function update_question(temp) {
-      var temp2 = document.getElementById(temp);
-      temp2.style.display = 'none';
-      $.ajax({
-          type: 'POST',
-          url: 'update_question.php',
-
-          data: {
-            'question_id': temp,
-          },
-          success: function (response) {
-          }
-      });
-    }
-<?php
-  if($general_settings == "true")
-  {
-    ?>
-
-    <script type="text/javascript">
-      $.notify({
-        message: 'Quiz Info Updated Successfully' 
-      },{
-        type: 'success'
-      });
+ 
+   function publishQuiz(){
+  
+    if(questionAdded<questionSet){
+      document.getElementById("modalQuestionAlert").dataset.target ="#questionAlert";
+      document.getElementById("modalText").innerHTML= "Add more questions";
+    }else{
+  
+		window.location = "publishPage.php?test_code=<?php echo $test_details["generatedCode"]; ?>";
+	}
+   
   
 
-    <?php
-  }
-  else if($general_settings == "false")
-  {
-    ?>
-
-      <script type="text/javascript">
-        $.notify({
-          message: 'There was an error updating quiz info' 
-        },{
-          type: 'danger'
-        });
-
-    <?php
-  }
-  else {}
-  
-?>
-
+   }
+/*
 */
-
 </script>
 
 </body>

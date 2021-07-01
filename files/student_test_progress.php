@@ -2,7 +2,7 @@
 session_start();
 	include "../database/config.php";
 
-$current_student_id = $_POST['currrent_student'];
+$current_student_id = $_POST['currrent_student1'];
 
 
 $currentProgres="SELECT progress from students where student_id= $current_student_id";
