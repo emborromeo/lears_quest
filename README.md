@@ -1,4 +1,12 @@
 # lears_quest
+For Test
+Teacher Side
+Username: teacher
+Password: teacher
+
+Student Side 
+Username: student
+Password: student
 
 GAME BUILDER TEMPLATE DEVELOPMENT  
 Duration: MAY 2021 - JULY 2021 
