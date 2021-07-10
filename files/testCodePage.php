@@ -5,8 +5,21 @@ if(!isset($_SESSION["player_id"]))
 ?>
 
 <?php
+
   include '../database/config.php';
-?>
+
+   
+ $checkCode = "SELECT `generatedCode` FROM tbl_tests ";
+  $try=mysqli_query($conn,$checkCode);
+  if(mysqli_num_rows($try) > 0) {
+    while($row = mysqli_fetch_row($try)) {
+      $tempArray[] = $row;
+    }
+
+  }
+
+ 
+     ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,16 +48,18 @@ if(!isset($_SESSION["player_id"]))
 				<div class="container-role">
         <div class="wrap-login100">
 						
-						<div class="login100-form validate-form">
+						<div class="login100-form">
 						<span class="login100-form-title">
 							Paste the quiz code.
 						</span>
 						
-            <form id="login_form" method="post" action="playerStart.php">
+            <!--<form id="login_form" method="post" action="playerStart.php">-->
+
+
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <input type="text" name="testCode" id="testCode" class="input100" style="text-align:center; padding-left:10px">
+                        <input type="text" name="testCode" id="testCode" class="input100" style="text-align:center; padding-left:10px" required>
                         <span class="focus-input100"></span>
                        
                       </div>
@@ -54,12 +69,31 @@ if(!isset($_SESSION["player_id"]))
                   <div class="row center-element py-3">
                     <div class="col-md-12">
                       <div class="form-group" style="width: 100%;">
-                        <input type="submit" class="role-form-btn" value="Submit">
+                        <button class="role-form-btn" onclick="checkCode()">Submit </button>
                       </div>
                     </div>
                   </div>
               
-                </form>
+                <!--</form>-->
+
+                
+
+                <div class="modal fade" id="codeAlert" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+
+                      <div class="modal-body">
+                        <span id="modalText"></span>
+                      </div>
+                      <div class="modal-footer">
+                      <a href="#" data-toggle="modal" data-target="#" id="modalQuestionAlert1"> <button type="button" class="role-form-btn" data-dismiss="modal">Close</button></a>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+
+
             </div>
 					</div>
 				</div>
@@ -72,10 +106,41 @@ if(!isset($_SESSION["player_id"]))
   <script src="../admin/assets/js/core/popper.min.js"></script>
   <script src="../admin/assets/js/core/bootstrap.min.js"></script>
   <script>
-   function copyCode(){
-    let copyCode = document.getElementById("testCode").value;
-    console.log(copyCode);;
+
+
+    let code = <?php echo json_encode($tempArray); ?>;
+    console.log(code);
+    let codeInput;    
+    let codeExists;
+    function checkCode(){
+      codeInput = document.getElementById("testCode").value;
+
+      console.log(codeInput);
+
+      codeExists = exists(code, codeInput);
+
+     console.log(codeExists);
+     codeResult();
+    }
+  
+    function exists(arr, search) {
+      return arr.some(row => row.includes(search));
    }
+   
+   function codeResult(){
+     if(codeExists==true){
+     window.location = "playerStart.php?testCode="+codeInput;
+
+   }
+   else{
+     alert("Incorrect Quiz Code")
+
+    document.getElementById("modalQuestionAlert").dataset.target ="#codeAlert";
+    document.getElementById("modalText").innerHTML= "Incorrect Quiz Code";
+   }
+   }
+ 
+  
   </script>
 </body>
 </html>

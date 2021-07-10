@@ -51,21 +51,24 @@ $currentCode = $_SESSION['code'];
 
 		
         	<div class="gameCanvas" style="background-image:url('../assets/BACKGROUNDS/1.png')">
+			
         		<div class="row justify-content-between" id="settingsRow" >
 					<div class="col-1">
-					<button id="backBtn" onclick="backBtn1()"><img src="../assets/BUTTONS 2/back.png" alt="" width="40px"> </button>
+					<button id="backBtn" onclick="backBtn1()"><img src="../assets/BUTTONS 2/back.png" alt="" style="width: 3vw;"> </button>
 					</div>
 
 					<div class="col-2">
-                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" width="40px" id="soundImg"> </button>
-                        <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" width="40px"> </i></a> 
+                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" style="width: 3vw;" id="soundImg"> </button>
+                        <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" style="width: 3vw;"> </i></a> 
 					</div>
 
 			 	</div>
-				<div class="row justify-content-center" style="display: contents; padding:40px">
-					<center>
+
+				 <div class="row justify-content-center" id="finalBoard" style="display: contents; padding:40px">
+					<center>				 
+						<div class="container-final" style="background-image: url('../assets/BOARDS/final-board.png'); ">
+                     <div class="container" style="padding:170px;    height: 50vh;">
 					<div class="col-12" style="display:contents">
-						<h1 id="finalScoreText">Your Final <br> Score is</h1>
                         <h1 id="finalScoreNum"><?= $studentScore?></h1>
 						<div id="collectedStars">
 						
@@ -80,10 +83,14 @@ $currentCode = $_SESSION['code'];
 					</div>
                     <br>
 					<div class="col-12"  style="display:contents">
-                    <a href="#"><button class="role-form-bn" onclick="retryQuiz()" id="retryBtn"><img src="../assets/BUTTONS 2/retry-btn.png" alt="" width="150px"></button></a> </center>
-					</div>
+                    	<a href="#"><button class="role-form-bn" onclick="retryQuiz()" id="retryBtn"><img src="../assets/BUTTONS 2/retry-btn.png" alt="" style="width: 8vw;"></button></a> 
+					</div>					
+				</center>
+
 				</div>
 
+				 </div>
+				 </div>
 			</div>	
 		</center>
 		</div>
@@ -122,7 +129,7 @@ $currentCode = $_SESSION['code'];
 
 	let star = document.createElement("img"); 
     star.src="../assets/BUTTONS 2/Stars.png";
-	star.style.width="7vw"
+	star.style.width="7vw";
 
 	starsDiv.appendChild(star);  
 

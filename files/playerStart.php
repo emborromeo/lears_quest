@@ -1,14 +1,30 @@
 <?php
 session_start();
-if(!isset($_SESSION["player_id"]))
+if(!isset($_SESSION["player_id"]) && ($_SESSION["code"]))
 
 ?>
 
 <?php
 include '../database/config.php';
-$resultCode = $_POST["testCode"];
+//$resultCode = $_POST["testCode"];
+//$resultCode1 = $_REQUEST['test_code'];
+$resultCode = $_REQUEST['testCode'];
 
 $_SESSION['code'] = $resultCode;
+
+
+$student_id = $_SESSION['player_id'];
+
+$testCode = "SELECT * FROM tbl_tests WHERE generatedCode = '$resultCode' ";
+$resultTestId = mysqli_query($conn,$testCode);
+$rowTest = mysqli_fetch_assoc($resultTestId);
+$testId = (int) $rowTest['id'];
+
+$_SESSION['test_id'] = $testId;
+
+
+$studentScore = "INSERT INTO students (test_id, student_id, score) VALUES('$testId', '$student_id' ,'0') ";
+$insertScore = mysqli_query($conn,$studentScore);
 
 ?>
 <html>
@@ -38,13 +54,13 @@ $_SESSION['code'] = $resultCode;
 			<center>
         	<div class="gameCanvas" style="background-image:url('../assets/BACKGROUNDS/2.png');">
         		<div class="row" id="settingsRow" >
-					<div class="col-md-10">
+					<div class="col-lg-10 col-9">
                     <button id="backBtn" hidden ><i class="fa fa-chevron-left  fa-lg" hidden></i> Back</button>
 					</div>
 
-					<div class="col-md-2">
-                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" width="40px" id="soundImg"> </button>
-                        <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" width="40px"> </i></a> 
+					<div class="col-lg-2 col-3">
+                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" style="width: 3vw;"  id="soundImg"> </button>
+                        <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" style="width: 3vw;"> </i></a> 
 					</div>
 
 			 	</div>
@@ -53,7 +69,6 @@ $_SESSION['code'] = $resultCode;
 					<div class="col-12" style="display:contents">
 						<center><img src="../assets/TITLE/title-start	.png" alt="" style="width: 60vw"> </center>
 					</div> <br>  	
-
 					<div class="col-12"  style="display:contents">
                         <center> <a href="playerMap.php?quiz_code=<?php echo $resultCode;?>"> <button class="role-form-bn"> <img src="../assets/BUTTONS 2/start-btn.png" alt="" style="width: 20vw" id="startBtn"></button></a></center>
 					</div>

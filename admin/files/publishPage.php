@@ -15,7 +15,6 @@ $test_code = $_REQUEST['test_code'];
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="robots" content="noindex">
   <title>
@@ -43,12 +42,28 @@ $test_code = $_REQUEST['test_code'];
 						<span class="login100-form-title">
 							Here's the quiz code:
 						</span>
-						
+					
+            <div class="row">
+              <div class="col">
+                <button onclick="getQuizLink()">Quiz Link</button>
+
+              </div>
+              <div class="col">
+                <button onclick="getQuizCode()">Quiz Code</button>
+
+              </div>
+              <div class="col">
+                <button onclick="getQuizEmbed()"> Embed </button>
+
+
+              </div>
+
+            </div>	<hr>
             <div id="login_form">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <input type="text" id="testCode" class="input100" value="<?= $test_code;?>" style="text-align:center; padding-left:10px">
+                        <input type="text" id="testCode" class="input100" value="" style="text-align:center; padding-left:10px">
                         <span class="focus-input100"></span>
                        
                       </div>
@@ -62,7 +77,9 @@ $test_code = $_REQUEST['test_code'];
                       </div>
                     </div>
                   </div>
-              
+               
+                  
+              <!-- For embed get the link and add the location -->
                 </div>
             </div>
 
@@ -92,6 +109,22 @@ $test_code = $_REQUEST['test_code'];
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script>
+    let quizCode = <?php echo json_encode( $test_code);?>;
+
+    let quizLink = window.location.hostname +  "/the_lears_quest/files/playerLogin.php";
+
+
+    function getQuizLink(){
+      document.getElementById("testCode").value=quizLink;
+        }
+    function getQuizCode(){
+      document.getElementById("testCode").value=quizCode;
+
+    }
+    function getQuizEmbed(){
+      document.getElementById("testCode").value= "<iframe width='1024px' height='580px' src='https://" + quizLink + "'/>";
+
+    }
    function copyCode(){
     let copyCode = document.getElementById("testCode");
 
@@ -104,7 +137,7 @@ $test_code = $_REQUEST['test_code'];
 
     /* Alert the copied text */
     document.getElementById("modalCopyAlert").dataset.target ="#questionAlert";
-    document.getElementById("modalText").innerHTML= "Succesfuly copied" + " " + copyCode.value;
+    document.getElementById("modalText").innerHTML= "Succesfuly copied";
   
    }
   </script>

@@ -5,6 +5,7 @@ if(!isset($_SESSION["user_id"]))
 ?>
 <?php
   include '../../database/config.php';
+  $test_id = $_REQUEST['test_id'];
 
   if(isset($_POST['general_settings_update'])) {
     $test_id = $_POST['test_id'];
@@ -59,7 +60,6 @@ $questionsAdded = "SELECT * FROM question_test_mapping WHERE test_id=$test_id";
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="robots" content="noindex">
   <meta http-equiv="pragma" content="no-cache" />
@@ -106,16 +106,14 @@ $questionsAdded = "SELECT * FROM question_test_mapping WHERE test_id=$test_id";
 
 	</header>
   <nav class="navbar navbar-light bg-light">
-    <div class="container">
         <div class="row justify-content-between" style="display: contents; width:100%;">
-        <div class="col-10">
-        <a href="dashboard.php" > <i class="fa fa-chevron-circle-left fa-lg" aria-hidden="true"></i></a>
+          <div class="col-6 col-sm-8 col-lg-1o">
+              <a href="dashboard.php" > <i class="fa fa-chevron-circle-left fa-lg" aria-hidden="true"></i></a>
+          </div>
+          <div class="col-4 col-sm-4 col-lg-2">
+            Editing Quiz Info
+          </div>
         </div>
-        <div class="col-2">
-           Editing Quiz Info
-        </div>
-        </div>
-    </div>
   </nav>
   <div class="wrapper ">
   
@@ -136,11 +134,11 @@ $questionsAdded = "SELECT * FROM question_test_mapping WHERE test_id=$test_id";
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Quiz Title</label>
-                        <input type="text" class="form-control" name="test_name"  value="<?= $test_details["title"];?>"/>
+                        <input type="text" class="form-control" name="test_name"  value="<?= $test_details["title"];?>" required/>
                       </div>
                       <div class="form-group">
                         <label>Quiz scope</label>
-                        <input type="text" class="form-control" name="quiz_scope" value="<?= $test_details["scope"];?>"/>
+                        <input type="text" class="form-control" name="quiz_scope" value="<?= $test_details["scope"];?>" required/>
                       </div>
                     
                       <div class="form-group">
@@ -166,7 +164,7 @@ $questionsAdded = "SELECT * FROM question_test_mapping WHERE test_id=$test_id";
                     </div>
                   </div>
                   <div class="row center-element">
-                    <div class="col-md-8">
+                    <div class="col-md-8 col-sm-6 col-8">
                       <div class="form-group">
                         <button class="role-form-btn">UPDATE</button>
                       </div>
@@ -181,15 +179,15 @@ $questionsAdded = "SELECT * FROM question_test_mapping WHERE test_id=$test_id";
             <div class="card">
               <div class="card-header">
               <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-4 col-md-8 col-sm-6 ">
                     <h5 class="title"> Questions</h5>
                   </div>
                   <form id="form-add-questions" method="POST" action="add_question.php">
                     <input type="hidden" name="test_id" value="<?= $test_id;?>">
                   </form>
              
-                  <div class="col-md-6">
-                  <a href="#" data-toggle="modal" data-target="#" id="modalQuestionAlert"> <button class="role-form-btn" onclick="redirect_to_add_question()" id="addQuestion" style="margin-top:0px;width:200px !important;float:right !important;">ADD QUESTION</button></a>
+                  <div class="col-8 col-md-4 col-sm-6 ">
+                  <a href="#" data-toggle="modal" data-target="#" id="modalQuestionAlert"> <button class="role-form-btn" onclick="redirect_to_add_question()" id="addQuestion" style="margin-top:0px;float:right !important;">ADD QUESTION</button></a>
                   </div>
                 </div>  
               </div>
@@ -237,7 +235,7 @@ $questionsAdded = "SELECT * FROM question_test_mapping WHERE test_id=$test_id";
                                   
 
                                   <!--<td><button id="update" name="update" class="role-form-btn update" onclick="update_question('<?= $row1["id"]; ?>')"><i class="fa fa-save"></i></button></td>-->
-                                  <td><a href="updateQuestionPage.php?id=<?php echo $row1["id"]; ?>"><i class="fa fa-edit fa-lg"></i></a></td>
+                                  <td><a href="updateQuestionPage.php?id=<?php echo $row1["id"];?>&test_id=<?php echo $test_id;?>"><i class="fa fa-edit fa-lg"></i></a></td>
                                   <td><a onclick="delete_question('<?= $row1["id"]; ?>','<?php echo $test_id; ?>')" id="delete" name="delete"><i class="fa fa-trash fa-lg"></i></a> </td>
                                 </tr>
 
@@ -288,7 +286,7 @@ $questionsAdded = "SELECT * FROM question_test_mapping WHERE test_id=$test_id";
 
         <div class="row">
           <div class="container" style="width: 15rem"> 
-        <button class="role-form-btn" onclick="publishQuiz()">Publish</button>
+          <a href="#" data-toggle="modal" data-target="#" id="modalQuestionAlert1"> <button class="role-form-btn" onclick="publishQuiz()">Publish</button> </a>
           </div>
         </div>
       </div>
@@ -319,7 +317,6 @@ $questionsAdded = "SELECT * FROM question_test_mapping WHERE test_id=$test_id";
     function redirect_to_add_question() {
       if(questionSet==questionAdded){
      
-        //this should be modal
         document.getElementById("modalQuestionAlert").dataset.target ="#questionAlert";
         document.getElementById("modalText").innerHTML= "You have reached the set number of questions";
       }
@@ -353,7 +350,7 @@ $questionsAdded = "SELECT * FROM question_test_mapping WHERE test_id=$test_id";
    function publishQuiz(){
   
     if(questionAdded<questionSet){
-      document.getElementById("modalQuestionAlert").dataset.target ="#questionAlert";
+      document.getElementById("modalQuestionAlert1").dataset.target ="#questionAlert";
       document.getElementById("modalText").innerHTML= "Add more questions";
     }else{
   

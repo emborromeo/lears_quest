@@ -15,6 +15,7 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 	include '../database/config.php';
 	$student_id = $_SESSION['player_id'];
 	$ccode = $_SESSION['code'];
+	$testId = $_SESSION['test_id'];
 
 	$testCode = "SELECT * FROM tbl_tests WHERE generatedCode = '$ccode'";
 	$resultTest = mysqli_query($conn,$testCode);
@@ -24,10 +25,11 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 
     $sql = "SELECT question_id FROM question_test_mapping WHERE test_id = $testId";
     $result = mysqli_query($conn,$sql);
+
     $row1;                     
         while($row = mysqli_fetch_assoc($result)) {
             $question_id = $row["question_id"];
-            $sql1 = "SELECT * FROM tbl_questions order by id asc";
+            $sql1 = "SELECT * FROM tbl_questions WHERE id = $question_id" ;
             $result1 = mysqli_query($conn,$sql1);
             $row1 = mysqli_fetch_assoc($result1);
 		}
@@ -37,7 +39,7 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 	$rowQuest = mysqli_fetch_assoc($resultQuest);
 
 	//	getting students score and progress
-	$studentInfo = "SELECT * FROM students WHERE student_id = '$student_id'";
+	$studentInfo = "SELECT * FROM students WHERE student_id = '$student_id' AND test_id = '$testId'";
 	$resultStudent = mysqli_query($conn,$studentInfo);
 	$rowStudent = mysqli_fetch_assoc($resultStudent);
 
@@ -69,52 +71,52 @@ width: 25%;
 height: 50%;
 margin: auto;
     margin-top: auto;
-margin-top: -80px;
+
 }
 		</style>
 	</head>
 
 <body style="display: flex;">
 <audio id="bgMusic" loop autoplay>
-  <source src="../assets/map2.mp3" type="audio/mpeg" />
+  <source src="../assets/map2.mp3" type="audio/mpeg"/>
 </audio>
 <div class="gameWrapper" style="background-image:url('../assets/BACKGROUNDS/map1blur.png')">
     <div class="mainHolder">
 		<div class="canvasHolder">
 			<center>	
-			<div class="gameCanvas" style="background-image:url('../assets/BACKGROUNDS/MAP\ 1.png');">
+			<div class="gameCanvas" style="background-image:url('../assets/BACKGROUNDS/MAP\ 1.png'); height: 100vh; ">
 				<!-- ROW FOR SETTINGS-->
 				<div class="row" id="settingsRow" >
-					<div class="col-1">
-                    	<button id="backBtn" onclick="backBtn1()"><img src="../assets/BUTTONS 2/back.png" alt="" width="40px"> </button>
+					<div class="col-1 col-sm-1">
+                    	<button id="backBtn"><img src="../assets/BUTTONS 2/back.png" alt="" style="width: 3vw;" disabled> </button>
 					</div>
-					<div class="col-6">
-						<img src="../assets/BUTTONS 2/Stars.png" id="star1" alt="" width="40px" > 
-						<img src="../assets/BUTTONS 2/Stars.png"" id="star2" alt="" width="40px" >
-						<img src="../assets/BUTTONS 2/Stars.png" id="star3" alt="" width="40px" >
-						<img src="../assets/BUTTONS 2/Stars.png" id="star4"  alt="" width="40px" >
-						<img src="../assets/BUTTONS 2/Stars.png" id="star5"  alt="" width="40px" >
-						<img src="../assets/BUTTONS 2/Stars.png" id="star6"  alt="" width="40px" >
-						<img src="../assets/BUTTONS 2/Stars.png" id="star7"  alt="" width="40px" >
-						<img src="../assets/BUTTONS 2/Stars.png" id="star8"  alt="" width="40px" >
-						<img src="../assets/BUTTONS 2/Stars.png" id="star9"  alt="" width="40px" >
-						<img src="../assets/BUTTONS 2/Stars.png" id="star10"  alt="" width="40px" >	
+					<div class="col-6 col-sm-5">
+						<img src="../assets/BUTTONS 2/Stars.png" id="star1" alt="" style="width: 3vw;" > 
+						<img src="../assets/BUTTONS 2/Stars.png"" id="star2" alt=""style="width: 3vw;" >
+						<img src="../assets/BUTTONS 2/Stars.png" id="star3" alt="" style="width: 3vw;" >
+						<img src="../assets/BUTTONS 2/Stars.png" id="star4"  alt="" style="width: 3vw;">
+						<img src="../assets/BUTTONS 2/Stars.png" id="star5"  alt="" style="width: 3vw;">
+						<img src="../assets/BUTTONS 2/Stars.png" id="star6"  alt="" style="width: 3vw;">
+						<img src="../assets/BUTTONS 2/Stars.png" id="star7"  alt="" style="width: 3vw;">
+						<img src="../assets/BUTTONS 2/Stars.png" id="star8"  alt="" style="width: 3vw;">
+						<img src="../assets/BUTTONS 2/Stars.png" id="star9"  alt="" style="width: 3vw;">
+						<img src="../assets/BUTTONS 2/Stars.png" id="star10"  alt="" style="width: 3vw;">	
 
 					</div>		
-					<div class="col-3">
-						<img src="../assets/BADGES/3X.png" id="badge3x"  alt=""  width="50px" >
-						<img src="../assets/BADGES/Faster.png" id="badgeFast"  alt=""  width="50px" >
-						<img src="../assets/BADGES/50.png" id="badge50"  alt=""  width="50px" >
-						<img src="../assets/BADGES/Finish.png" id="badgeFinish"  alt=""  width="50px" >
-						<img src="../assets/BADGES/Pass.png" id="badgePass"  alt=""  width="50px" >						
-						<img src="../assets/BADGES/100.png" id="badge100"  alt=""  width="50px" >
-						<img src="../assets/BADGES/Low Score.png" id="badgeLow"  alt=""  width="50px" >
+					<div class="col-3 col-sm-3">
+						<img src="../assets/BADGES/3X.png" id="badge3x"  alt=""  style="width: 4vw;">
+						<img src="../assets/BADGES/Faster.png" id="badgeFast"  alt=""  style="width: 4vw;">
+						<img src="../assets/BADGES/50.png" id="badge50"  alt=""  style="width: 4vw;">
+						<img src="../assets/BADGES/Finish.png" id="badgeFinish"  alt=""  style="width: 4vw;">
+						<img src="../assets/BADGES/Pass.png" id="badgePass"  alt=""  style="width: 4vw;">						
+						<img src="../assets/BADGES/100.png" id="badge100"  alt="" style="width: 4vw;">
+						<img src="../assets/BADGES/Low Score.png" id="badgeLow"  alt=""  style="width: 4vw;">
 
 
 					</div>	
-					<div class="col-md-2">
-                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" width="40px" id="soundImg"> </button>
-                        <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" width="40px"> </i></a> 
+					<div class="col-2 col-sm-3">
+                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt=""style="width: 3vw;" id="soundImg"> </button>
+                        <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" style="width: 3vw;"> </i></a> 
 					</div>
 
 			 	</div>
@@ -126,7 +128,7 @@ margin-top: -80px;
 					<div class="container-quests">
 					<div class="row" style="margin: 30px;">
 							<div class="col-2">
-								<a href="#" id="quest10" >	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest10Btn"></a>					
+								<a href="#" id="quest10" >	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;"  id="quest10Btn"></a>					
 
 							</div>
 							<div class="col-2">
@@ -141,44 +143,44 @@ margin-top: -80px;
 
 							</div>
 							<div class="col-2" >
-								<a href="#"  id="quest9"> 	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest9Btn"></a>				
+								<a href="#"  id="quest9"> 	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest9Btn"></a>				
 
 							</div>
 					
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-4"> 
-								<a href="#"  id="quest8">	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest8Btn"></a>					
+								<a href="#"  id="quest8">	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest8Btn"></a>					
 
 							</div>
 							<div class="col-8">
-								<a href="#"  id="quest7"  style="margin-left: 40px;" >	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest7Btn"></a>	
+								<a href="#"  id="quest7"  style="margin-left: 40px;" >	<img src="../assets/BOARDS/locatio1.png" alt=""style="width: 5vw;" id="quest7Btn"></a>	
 
 							</div>
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-3">
-								<a href="#" id="quest6" style="margin-right:100px 50px;">	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest6Btn"></a>					
+								<a href="#" id="quest6" style="margin-right:100px 50px;">	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest6Btn"></a>					
 
 							</div>
 							<div class="col-6">
 
 							</div>	
 							<div class="col-3">
-								<a href="#"  id="quest5"  style="margin-right:100px 50px;">	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest5Btn"></a>					
+								<a href="#"  id="quest5"  style="margin-right:100px 50px;">	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest5Btn"></a>					
 
 							</div>	
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-4">
-								<a href="#"  id="quest4"style="margin-right:100px 50px;" >	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest4Btn"></a>					
+								<a href="#"  id="quest4"style="margin-right:100px 50px;" >	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest4Btn"></a>					
 
 							</div>
 							<div class="col-4">
 								
 							</div>	
 							<div class="col-4">
-								<a href="#"  id="quest3" style="margin-bottom: -50px;margin-left: 110px;" >	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest3Btn"></a>	
+								<a href="#"  id="quest3" style="margin-bottom: -50px;margin-left: 110px;" >	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest3Btn"></a>	
 
 							</div>	
 							<div class="col-4">
@@ -187,7 +189,7 @@ margin-top: -80px;
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-2">
-								<a href="#"  id="quest2"   style="margin-bottom:30px ;">	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest2Btn"></a>					
+								<a href="#"  id="quest2"   style="margin-bottom:30px ;">	<img src="../assets/BOARDS/locatio1.png" alt=""style="width: 5vw;" id="quest2Btn"></a>					
 
 							</div>
 							<div class="col-3">
@@ -200,7 +202,7 @@ margin-top: -80px;
 
 							</div>	
 							<div class="col-2">	
-								<a href="questStory.php?id=<?php echo $row1["id"]; ?>"  id="quest1"  style="margin:30px ;"> 	<img src="../assets/BOARDS/locatio1.png" alt="" width="45px" id="quest1Btn"> </a>	
+								<a href="questStory.php?id=<?php echo $row1["id"]; ?>"  id="quest1"  style="margin:30px ;"> 	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest1Btn"> </a>	
 							</div>
 						</div>
 	
@@ -211,29 +213,33 @@ margin-top: -80px;
 				<!-- ROW FOR INSTRUCTION-->	
 				<div class="row  justify-content-center" id="gameInstructions" >	
 					<div class="instructionHolder">
-					<!--	<img src="../assets/lear.png" alt="" width="120px" id="lear">-->
-						<img src="../assets/BOARDS/instruction-box.png" alt="" style="margin-top: -25px; width:35vw;">
-						<div class="instructionText">
-							<p class="story" id="welcomeText"> Welcome, young adventurer! </p> 
-							<p class="gameStory" id="story1"></p>
+						<!--<img src="../assets/CHARACTER/LEAR.png" alt="" width="120px" id="lear">-->
+						<img src="../assets/BOARDS/instruction-box.png" alt="" style="margin-top: -25px; width:33vw;">							
+
+						<div class="instructionText">						
+						<p class="story" id="welcomeText"> Welcome, young adventurer! </p> 
+                            <div class="container"  style="width: 30vw;">
+								<p class="gameStory" id="story1" ></p>
 							<p class="gameStory" id="story1a"></p>
 							<p class="gameStory" id="story2"></p>
 							<p class="gameStory" id="story2a"></p>
 							<p class="gameStory" id="story3"></p>
 							<p class="gameStory" id="story3a"></p>		
 							
-							<p id="dialogue"></p>					
-							<p class="story" id="dialogue1"></p>					
-
+							
+							</div>
+											
+	                       <p id="dialogue"></p>					
+							<p class="story" id="dialogue1"></p>
 							<br>
-						<button id="continueBtn" onclick="continueText()" style="display: inline;"><img src="../assets/BUTTONS 2/next-btn.png" alt="" width="100vw"></button>
-						<a href="#"  id="viewBadge"><button id="nextBtn" onclick="nextBtn()" style="display: none;"><img src="../assets/BUTTONS 2/next-btn.png" alt="" width="100vw"></button></a> 
-						<a href="#"  id="finishBtn"><button id="finishBtn" onclick="finishBtn()" ><img src="../assets/BUTTONS 2/next-btn.png" alt="" width="100vw"></button></a> 
-						<a href="#"  id="remarksBtn"><button id="remarksBtn" onclick="remarksBtn()" ><img src="../assets/BUTTONS 2/next-btn.png" alt="" width="100vw"></button></a> 
-						<a href="#"  id="finalBtn"><button id="finalBtn" onclick="finalBtn()" ><img src="../assets/BUTTONS 2/next-btn.png" alt="" width="100vw"></button></a> 
+						<button id="continueBtn" onclick="continueText()" style="display: inline;"><img src="../assets/BUTTONS 2/next-btn.png" alt="" style=" width:8vw;"></button>
+						<a href="#"  id="viewBadge"><button id="nextBtn" onclick="nextBtn()" style="display: none;"><img src="../assets/BUTTONS 2/next-btn.png" alt="" style=" width:8vw;"></button></a> 
+						<a href="#"  id="finishBtn"><button id="finishBtn" onclick="finishBtn()" ><img src="../assets/BUTTONS 2/next-btn.png" alt="" style=" width:8vw;"></button></a> 
+						<a href="#"  id="remarksBtn"><button id="remarksBtn" onclick="remarksBtn()" ><img src="../assets/BUTTONS 2/next-btn.png" alt="" style=" width:8vw;"></button></a> 
+						<a href="#"  id="finalBtn"><button id="finalBtn" onclick="finalBtn()" ><img src="../assets/BUTTONS 2/next-btn.png" alt="" style=" width:8vw;"></button></a> 
 
-						<a href="questStory.php?id=<?php echo $row1["id"];?>"  id="toQuest1" style="display:none"><img src="../assets/BUTTONS 2/go-to-quest.png" width="140vw" alt=""> </a>
-						<a href="finalScorePage.php?code=<?php echo $ccode;?>"  id="finalScorePage" style="display:none"><img src="../assets/BUTTONS 2/view-score.png" width="140vw" alt=""></a>
+						<a href="questStory.php?id=<?php echo $row1["id"];?>"  id="toQuest1" style="display:none"><img src="../assets/BUTTONS 2/go-to-quest.png"style=" width:8vw;" alt=""> </a>
+						<a href="finalScorePage.php?code=<?php echo $ccode;?>"  id="finalScorePage" style="display:none"><img src="../assets/BUTTONS 2/view-score.png" style=" width:8vw;" alt=""></a>
 					</div>
 						</div>				
 	
@@ -247,8 +253,8 @@ margin-top: -80px;
 				<div id="popup1" class="overlay">
 
 					<div id="feedbackBg">
-						<div class="popup">
-						<div class="content" style="margin-bottom: auto;margin-top: 220px;">		
+						<div class="popup" style="margin: 160px auto;">
+						<div class="content" >		
 							<center><span id="feedbackTitle"></span> </center>
 
 							<center><p id="feedbackText">
@@ -262,12 +268,12 @@ margin-top: -80px;
 							<div id="badgeAchievement">
 
 							</div>
-							<center><button onclick="nextBadge()" id="nextBadge"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  width="100vw" style="margin-top: 40px;"> </button></center>
+							<center><button onclick="nextBadge()" id="nextBadge"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="margin-top: 120px; width:8vw"> </button></center>
 
-							<center><button onclick="hideBadge()" id="hideBadge"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  width="100vw" style="margin-top: 40px;"> </button></center>
-							<center><button onclick="finalBadge()" id="finalBadge"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  width="100vw" style="margin-top: 40px;"> </button></center>
+							<center><button onclick="hideBadge()" id="hideBadge"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="margin-top: 120px; width:8vw"> </button></center>
+							<center><button onclick="finalBadge()" id="finalBadge"><img src="../assets/BUTTONS 2/next-btn.png" alt=""   style="margin-top: 120px; width:8vw"> </button></center>
 
-							<center style="padding: 10px;"><a href="finalScorePage.php?code=<?php echo $ccode;?>"  id="finalPageBtn" ><img src="../assets/BUTTONS 2/view-score.png" alt="" width="100vw"></a>	</center>
+							<center style="padding: 10px;"><a href="finalScorePage.php?code=<?php echo $ccode;?>"  id="finalPageBtn" ><img src="../assets/BUTTONS 2/view-score.png" alt=""style="margin-top: 55px; width:8vw"></a>	</center>
 
 						</div>
 					</div>
@@ -302,6 +308,8 @@ margin-top: -80px;
 
 	/*let testTotal = <?php echo (int) ($testRow['total_questions']); ?>; 
    */
+ // let passTestCode  = <?php echo json_encode ($ccode); ?>; 
+
 	let testTotal  = <?php echo (int) ($rowTest['total_questions']); ?>; 
 	console.log(testTotal);
 	let currentScore  = <?php echo (int) ($rowStudent['score']); ?>; 
@@ -309,7 +317,7 @@ margin-top: -80px;
 
     
 	function backBtn1(){
-		window.location.replace("playerStart.php");
+		window.location.href="playerStart.php";
 
 	}
     function pauseMusic(){
@@ -634,7 +642,7 @@ margin-top: -80px;
 		document.getElementById("quest1").href = "#"; 
 		document.getElementById("quest2Btn").src='../assets/BOARDS/location2.png';
 
-		document.getElementById("quest2").href = "questStory.php?id=<?php echo $row1["id"]+1; ?>"; 
+		document.getElementById("quest2").href = "questStory.php?id=<?php echo $row1["id"]-1; ?>"; 
 
 
 	}
@@ -645,7 +653,7 @@ margin-top: -80px;
 		document.getElementById("quest1").href = "#"; 
 		document.getElementById("quest3Btn").src='../assets/BOARDS/location2.png';
 
-		document.getElementById("quest3").href = "questStory.php?id=<?php echo $row1["id"]+2; ?>"; 
+		document.getElementById("quest3").href = "questStory.php?id=<?php echo $row1["id"]-2; ?>"; 
 
 	}
 	else if(currentProgress==3){
@@ -655,7 +663,7 @@ margin-top: -80px;
 		
 		document.getElementById("quest4Btn").src='../assets/BOARDS/location2.png';
 
-		document.getElementById("quest4").href = "questStory.php?id=<?php echo $row1["id"]+3; ?>"; 
+		document.getElementById("quest4").href = "questStory.php?id=<?php echo $row1["id"]-3; ?>"; 
 
 	}
 	else if(currentProgress==4){
@@ -667,7 +675,7 @@ margin-top: -80px;
 		document.getElementById("quest1").href = "#"; 
 		document.getElementById("quest5Btn").src='../assets/BOARDS/location2.png';
 
-		document.getElementById("quest5").href = "questStory.php?id=<?php echo $row1["id"]+4; ?>"; 
+		document.getElementById("quest5").href = "questStory.php?id=<?php echo $row1["id"]-4; ?>"; 
 
 	}
 	else if(currentProgress==5){
@@ -679,7 +687,7 @@ margin-top: -80px;
 
 		document.getElementById("quest6Btn").src='../assets/BOARDS/location2.png';
 
-		document.getElementById("quest6").href = "questStory.php?id=<?php echo $row1["id"]+5; ?>"; 
+		document.getElementById("quest6").href = "questStory.php?id=<?php echo $row1["id"]-5; ?>"; 
 
 		
 	}
@@ -693,7 +701,7 @@ margin-top: -80px;
 
 		document.getElementById("quest7Btn").src='../assets/BOARDS/location2.png';
 
-		document.getElementById("quest7").href = "questStory.php?id=<?php echo $row1["id"]+6; ?>"; 
+		document.getElementById("quest7").href = "questStory.php?id=<?php echo $row1["id"]-6; ?>"; 
 
 	}
 	else if(currentProgress==7){
@@ -707,7 +715,7 @@ margin-top: -80px;
 
 		document.getElementById("quest8Btn").src='../assets/BOARDS/location2.png';
 
-		document.getElementById("quest8").href = "questStory.php?id=<?php echo $row1["id"]+7; ?>"; 
+		document.getElementById("quest8").href = "questStory.php?id=<?php echo $row1["id"]-7; ?>"; 
 
 	}
 	else if(currentProgress==8){
@@ -722,7 +730,7 @@ margin-top: -80px;
 
 		document.getElementById("quest9Btn").src='../assets/BOARDS/location2.png';
 
-		document.getElementById("quest9").href = "questStory.php?id=<?php echo $row1["id"]+8; ?>"; 
+		document.getElementById("quest9").href = "questStory.php?id=<?php echo $row1["id"]-8; ?>"; 
 
 	}
 	else if(currentProgress==9){
@@ -738,7 +746,7 @@ margin-top: -80px;
 
 		document.getElementById("quest10Btn").src='../assets/BOARDS/location2.png';
 
-		document.getElementById("quest10").href = "questStory.php?id=<?php echo $row1["id"]+9; ?>"; 
+		document.getElementById("quest10").href = "questStory.php?id=<?php echo $row1["id"]-9; ?>"; 
 
 	}
 	else if(currentProgress==10){
@@ -804,7 +812,7 @@ margin-top: -80px;
 	}
 	function hideBadge(){
 		document.getElementById("popup1").style.display="none";
-		document.getElementById("gameInstructions").style.display="inline";
+		document.getElementById("gameInstructions").style.display="block";
 
 		document.getElementById("dialogue").innerHTML="Continue your journey! ";
 		document.getElementById("dialogue1").style.display="none";
@@ -843,7 +851,7 @@ margin-top: -80px;
 			document.getElementById("badgeFinish").style.display="inline";
 
 				console.log("You passed");
-				document.getElementById("gameInstructions").style.display="inline";
+				document.getElementById("gameInstructions").style.display="block";
 				document.getElementById("popup1").style.display="none";
 				document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb-pass.png')";
 
@@ -911,7 +919,7 @@ margin-top: -80px;
 		document.getElementById("badgePass").style.display="inline";
 
 		if(currentScore==testTotal){
-				document.getElementById("gameInstructions").style.display="inline";
+				document.getElementById("gameInstructions").style.display="block";
 				document.getElementById("popup1").style.display="none";
 
 				console.log("Perfect Score")
@@ -938,7 +946,7 @@ margin-top: -80px;
 			document.getElementById("nextBtn").style.display="none";
 			document.getElementById("remarksBtn").style.display="none";
 
-			document.getElementById("gameInstructions").style.display="inline";
+			document.getElementById("gameInstructions").style.display="block";
 
 			document.getElementById("finalScorePage").style.display="inline";
 

@@ -7,27 +7,30 @@ if(!isset($_SESSION["user_id"]))
 ?>
 <?php
   include '../../database/config.php';
+  $test_id = $_REQUEST['test_id'];
 
 $questionid = $_REQUEST['id'];
 $query = "SELECT * from tbl_questions where id= $questionid"; 
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
 
+//$questID =  $row['quest_id'];
+
 $questRecords ="SELECT quest_task, quest_id From tbl_quest ";
 $quest_result =  mysqli_query($conn, $questRecords);
+
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="robots" content="noindex">
   <meta http-equiv="pragma" content="no-cache" />
   <meta http-equiv="expires" content="-1" />
   <title>
-    <?=ucfirst(basename($_SERVER['PHP_SELF'], ".php"));?>
+   Update Question
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -67,22 +70,20 @@ $quest_result =  mysqli_query($conn, $questRecords);
     </header>
 
     <nav class="navbar navbar-light bg-light">
-        <div class="container">
-            <div class="row justify-content-between" style="display: contents; width:100%;">
-            <div class="col-md-10 col-sm-8 ">
-            <a href="dashboard.php" > <i class="fa fa-chevron-circle-left fa-lg" aria-hidden="true"></i></a>
-            </div>
-            <div class="col-md-2 col-sm-4 ">
-                <h6>Updating questions</h6>
-            </div>
-            </div>
+    <div class="row justify-content-between" style="display: contents; width:100%;">
+          <div class="col-6 col-sm-8 col-lg-1o">
+              <a href="dashboard.php" > <i class="fa fa-chevron-circle-left fa-lg" aria-hidden="true"></i></a>
+          </div>
+          <div class="col-4 col-sm-4 col-lg-2">
+            Updating Question
+          </div>
         </div>
     </nav>
     <div class="wrapper ">
    
         <div class="main-panel" style="width: 100%;">
             <?php
-        
+
                 if(isset($_POST['update_question'])) {
                 $questionid = $_REQUEST['id'];
                     
@@ -97,6 +98,8 @@ $quest_result =  mysqli_query($conn, $questRecords);
                 
                 $sql = "UPDATE tbl_questions SET question_text= '$question_text'  ,optionA= '$op_a' ,optionB= '$op_b'  ,optionC= '$op_c' ,optionD= '$op_d' ,correctAns= '$op_correct',quest_id= '$chosen_quest' where id=$questionid";
                 $result = mysqli_query($conn,$sql);
+
+                //header("Location:test_details.php?test_id=$test_id");
 
                 }
             
@@ -153,19 +156,19 @@ $quest_result =  mysqli_query($conn, $questRecords);
                                     <div class="row"> 
                                         <div class="col-6">
                                         <select id="correctAnswer" name="correctAnswer" name="class_option"  style="width:100%;" required>
-                                            <option selected="true" id="chosenAnswer" disabled="disabled">Choose answer</option>   
-                                            <option value="A" >A</option>      
-                                            <option value="B">B</option>      
-                                            <option value="C" >C</option>      
-                                            <option value="D" >D</option>      
-                
+                                            <option selected="true" id="chosenAnswer" value="" disabled="disabled">Choose answer</option>   
+                                            <option value="A" id="optionA">A</option>      
+                                            <option value="B" id="optionB">B</option>      
+                                            <option value="C" id="optionC" >C</option>      
+                                            <option value="D" id="optionD">D</option>      
+
                                         </select>
 
                                         </div>
                                         <div class="col-6">
                                             <div class="select">
                                             <select name="correspondingQuest" id="correspondingQuest"  style="width:100%;" required>
-                                                <option selected id="chosenQuest">Choose a quest</option>
+                                                <option selected id="chosenQuest" value="<?php echo $row['quest_id'];?>"> Choose a quest</option>
                                                     <?php    
                                                 while($data = mysqli_fetch_array($quest_result))
                                                     {         
@@ -180,9 +183,9 @@ $quest_result =  mysqli_query($conn, $questRecords);
                                     </div>
                                 </div>
                                 <div class="row center-element">
-                                    <div class="col-md-8">
+                                    <div class="col-lg-4 col-md-6 col-sm-6 col-7"">
                                     <div class="form-group">
-                                        <button class="role-form-btn">UPDATE </button>
+                                        <button class="role-form-btn" >UPDATE </button>
                                     </div>
                                     </div>
                                 </div>
@@ -204,9 +207,10 @@ $quest_result =  mysqli_query($conn, $questRecords);
   <script src="../assets/js/core/jquery.min.js"></script>
 
   <script>
-    var correctChoice = <?php echo ($row['correctAns']); ?>;
+    let correctChoice = <?php echo ($row['correctAns']); ?>;
     answerChooser= document.getElementById("correctAnswer");
-    answerChooser.value=correctChoice;
+    console.log(answerChooser);
+    answerChooser.value="hi";
     
     
   </script>

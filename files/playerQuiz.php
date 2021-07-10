@@ -41,8 +41,8 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 
   //inserting test id, student id to table students
   //insert 
-  $studentScore = "INSERT INTO students (test_id, student_id, score) VALUES('$testId', '$student_id' ,'0') ";
-  $insertScore = mysqli_query($conn,$studentScore);
+  //$studentScore = "INSERT INTO students (test_id, student_id, score) VALUES('$testId', '$student_id' ,'0') ";
+ // $insertScore = mysqli_query($conn,$studentScore);
   /*
     $studentNewScore = "UPDATE students SET score = '5' where student_id='$student_id'";
 		$saveScore = mysqli_query($conn,$studentNewScore);
@@ -68,6 +68,7 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 		<link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../css/util.css">
 		<link rel="stylesheet" type="text/css" href="../css/main.css">
+
 		<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	
 	<style>
@@ -78,8 +79,7 @@ background-size: 100% 100%;
 width: 25%;
 height: 50%;
 margin: auto;
-    margin-top: auto;
-margin-top: -50px;
+ 
 }
 #minutes, #seconds, #colon{
     color: #723c29;
@@ -88,7 +88,7 @@ margin-top: -50px;
 
   }
   #timer{
-    margin-top: 20px;
+    margin-top: 40px;
   }
 
 	</style>
@@ -96,21 +96,21 @@ margin-top: -50px;
 	</head>
 
 <body style="display: flex;">
-<div class="gameWrapper" >
+<div class="gameWrapper" id="gameWrapper" >
     <div class="mainHolder">
 		<div class="canvasHolder">
       <center>
-			<div class="gameCanvas" id="gameCanvas">
+			<div class="gameCanvas" id="gameCanvas" style="height: 100vh;">
 				<!-- ROW FOR SETTINGS-->
 			    <div class="row justify-content-between" id="settingsRow" >
 
-					<div class="col-1">
-          <button id="backBtn" onclick="backBtn1()"><img src="../assets/BUTTONS 2/back.png" alt="" width="40px"> </button>
+					<div class="col-1 col-sm-1">
+          <button id="backBtn" onclick="backBtn1()"><img src="../assets/BUTTONS 2/back.png" alt="" style="width: 3vw;"> </button>
 					</div>
 
-					<div class="col-2">
-            <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" width="40px" id="soundImg"> </button>
-             <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" width="40px"> </i></a> 
+					<div class="col-2 col-sm-3">
+            <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" style="width: 3vw;" id="soundImg"> </button>
+             <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" style="width: 3vw;"> </i></a> 
 					</div>
 
 			    </div>
@@ -122,13 +122,14 @@ margin-top: -50px;
 				<!-- ROW QUESTION-->
      
 				<div class="row justify-content-center" id="gameMap" style="margin-left:0px">
-					    <center><div class="container-quiz" style="background-image: url('../assets/BOARDS/quest-box.png');width:80vw;margin-top:-50px">
+					    <center>
+            <div class="container-quiz" style="background-image: url('../assets/BOARDS/quest-box.png');width:70vw; height:auto;margin-top:-45px">
               <div class="row justify-content-center">
                   <span id="question"><?= $row1["question_text"];?></span>
               </div> <br> 
                 <input type="hidden" name="save_score">
                 <div class="quiz " id="quiz" style="width: 90vw;">  
-                  <div id="timer">
+                  <div id="timer" >
                      <span id="minutes" >00</span><span id="colon">:</span><span id="seconds">00</span>
                   </div>   
 
@@ -141,7 +142,7 @@ margin-top: -50px;
                     <br>
 
                     <div class="row justify-content-center">
-                        <a class="button" href="#popup1"> <button class="role-form-bn" onclick="submitAnswer()"> <img src="../assets/BUTTONS 2/submit-btn.png" alt="" width="140vw"></button></a>
+                        <a class="button" href="#popup1"> <button class="role-form-bn" onclick="submitAnswer()"> <img src="../assets/BUTTONS 2/submit-btn.png" alt="" style=" width:8vw;"></button></a>
                     </div>
 				      	</div>
 					</div>  
@@ -152,24 +153,20 @@ margin-top: -50px;
 				<div id="popup1" class="overlay">
 
 					<div id="feedbackBg">
-						<div class="popup">
-						<div class="content" style="margin-bottom: auto;margin-top: 220px;">		
-							<center><span id="feedbackTitle"></span> </center>
+						<div class="popup" style="padding: 0px; margin:160px auto">
+              <div class="content">		
 
-							<center><p id="feedbackText">
-							</p> </center>
+                <center><p id="feedbackText">
+                </p> </center>
 
-							<div id="starPoints">
-						<!--	<center><img src="../assets/BUTTONS 2/Stars.png" id="star1" alt="" width="40px">  </center>-->
+                <div id="starPoints">
+              <center><img src="../assets/BUTTONS 2/Stars.png" id="star1" alt="" style=" width:8vw;">  </center>
 
-							</div>
+                </div>
 
-							<div id="badgeAchievement">
-
-							</div> 
-							<center> <a href="playerMap.php?quiz_code=<?php echo $code;?>" id="continueMap"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  width="100vw"> </a></center>
-						</div>
-					</div>
+                <center> <a href="playerMap.php?quiz_code=<?php echo $code;?>" id="continueMap"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style=" width:8vw;"  style="margin: 15px;"> </a></center>
+              </div>
+					  </div>
 					</div> 
 					
 				</div>
@@ -190,8 +187,10 @@ margin-top: -50px;
 <script src="../vendor/tilt/tilt.jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
 
-<script type="text/javascript">// I'm sure theres a million and one much easier ways to do this! But here's how I made it work!
-let minutesLabel = document.getElementById("minutes");
+<script type="text/javascript">
+      document.getElementById("star1").style.display="none";
+
+        let minutesLabel = document.getElementById("minutes");
         let secondsLabel = document.getElementById("seconds");
         let totalSeconds = 0;
         setInterval(setTime, 1000);
@@ -225,6 +224,7 @@ function getTime(){
   let answer  = <?php echo json_encode ($row1['correctAns']); ?>; 
   
   document.getElementById("gameCanvas").style.backgroundImage="url('<?php echo $rowQuest['img_path']; ?>')";
+	document.getElementById("gameWrapper").style.backgroundImage="url('<?php echo $rowQuest['img_path']; ?>')";
 
 
   function backBtn1(){
@@ -256,14 +256,17 @@ function getTime(){
     if(answer==selectedAnswer){ 
   //pasas to update score
   //enable next queston
-      document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/correct2.png')";
+      document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/correct1.png')";
+      document.getElementById("star1").style.display="block";
       console.log("correct");
-      feedbackText.innerHTML = "       ";
+      feedbackText.innerHTML = "  ";
 
       updateScore();
     }
     else{
-      document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/wrong1.png')";
+      document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/wrong2.png')";
+      document.getElementById("star1").style.display="none";
+
       feedbackText.innerHTML = "The answer is " + answer;
       console.log(answer)
       updateProgress();
@@ -273,24 +276,28 @@ function getTime(){
     
    function updateScore(){
     let studentid = <?php echo (int) $student_id; ?>;
+    let student_test = <?php echo (int) $testId; ?>;
 
     $.ajax({
       url: "checkQuiz.php",
       type: "POST",
       data:{"score":0,
-      "currrent_student":studentid}
+      "currrent_student":studentid,
+       "current_test": student_test}
     })
 
    }
  
    function updateProgress(){
     let studentid1 = <?php echo (int) $student_id; ?>;
+    let student_test1 = <?php echo (int) $testId; ?>;
 
     $.ajax({
       url: "student_test_progress.php",
       type: "POST",
       data:{
-      "currrent_student1":studentid1}
+      "currrent_student1":studentid1,
+      "current_test1": student_test1}
     })
 
    }

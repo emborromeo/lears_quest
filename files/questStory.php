@@ -22,7 +22,7 @@ $code = $_SESSION['code'];
   $row1;
 
   while($row = mysqli_fetch_assoc($result)) {
-    $sql1 = "SELECT * FROM tbl_questions  WHERE id = $questionid";
+    $sql1 = "SELECT * FROM tbl_questions  WHERE id = $questionid ";
     $result1 = mysqli_query($conn,$sql1);
     $row1 = mysqli_fetch_assoc($result1);
   }
@@ -58,42 +58,44 @@ $code = $_SESSION['code'];
 <audio id="bgMusic" loop autoplay>
   <source src="../assets/map2.mp3" type="audio/mpeg" />
 </audio>
-<div class="gameWrapper" >
+<div class="gameWrapper" id="gameWrapper" style=" background: rgba(0,0,0,0.3)">
     <div class="mainHolder">
 		<div class="canvasHolder">
             <center>
-        	<div class="gameCanvas" id="gameCanvas">
+        	<div class="gameCanvas" id="gameCanvas" style="height: 100vh;">
             <div class="row justify-content-between" id="settingsRow" >
 					<div class="col-1">
-                    <button id="backBtn" onclick="backBtn1()"><img src="../assets/BUTTONS 2/back.png" alt="" width="40px"> </button>
+                    <button id="backBtn"onclick="backBtn1()"><img  style="width: 3vw;" src="../assets/BUTTONS 2/back.png" alt="" > </button>
 					</div>
 
-					<div class="col-2">
-                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" width="40px" id="soundImg"> </button>
-                        <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" width="40px"> </i></a> 
+					<div class="col-3">
+                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt=""style="width: 3vw;" id="soundImg"> </button>
+                        <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" style="width: 3vw;"> </i></a> 
 					</div>
 
 			 	</div>
-				<div class="row justify-content-center">
+                 <center>
+				<div class="row justify-content-center" style="background-color: red; width:70vw; height:40vw; border-radius: 10px;background: rgba(0,0,0,0.3);margin-top:10px">
 
                     <div class="col-12">
-                       <center> <p id="questTitle"><?= $rowQuest['quest_task']?></p></center> 
+                       <center> <p style="color: #fff; font-size:2vw" id="questTitle"><?= $rowQuest['quest_task']?></p></center> 
 
                     </div>
 
                     <div class="col-12">
-                    	<center><p id="questStory"></p>	</center> 
+                    	<center><p style="color: #fff;font-size:2vw" id="questStory"></p>	</center> 
 
                     </div>
                    
-                    <div class="col-12" style="margin: 60px;">
+                    <div class="col-12" style="margin: 30px;">
 
                     </div>
                    
 				</div>
-                <div class="row" >
-                     <div class="col-12" style="margin-top:auto; margin-bottom:-220px">
-                        <center> <a href="playerQuiz.php?id=<?php echo $questionid;?>" id="toQuestion" ><img src="../assets/BUTTONS 2/next-btn.png" alt="" style="width: 18vw;"> </a></center> 
+                </center>
+                <div class="row" style="margin-top: -30px;">
+                     <div class="col-12" >
+                        <center> <a href="playerQuiz.php?id=<?php echo $questionid;?>" id="toQuestion" ><img src="../assets/BUTTONS 2/next-btn.png" alt="" style="width: 10vw;"> </a></center> 
                     </div>
                 </div>
 			</div> 
@@ -128,6 +130,7 @@ $code = $_SESSION['code'];
     let questImg  = <?php echo json_encode ($rowQuest['img_path']); ?>; 
     console.log(questImg);
 	document.getElementById("gameCanvas").style.backgroundImage="url('<?php echo $rowQuest['img_path']; ?>')";
+	document.getElementById("gameWrapper").style.backgroundImage="url('<?php echo $rowQuest['img_path']; ?>')";
 
 
     console.log(questTask);

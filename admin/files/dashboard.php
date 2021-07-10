@@ -7,7 +7,6 @@ if(!isset($_SESSION["user_id"]))
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="robots" content="noindex">
   <meta http-equiv="pragma" content="no-cache" />
@@ -52,14 +51,12 @@ if(!isset($_SESSION["user_id"]))
 			</div>
 	</header>
   <nav class="navbar navbar-light bg-light">
-  <div class="container">
       <div class="row justify-content-between" style="display: contents; width:100%;">
-      <div class="col-10">
-      <h6>Dashboard</h6>
+      <div class="col-6 col-sm-8 col-lg-10">
+          <h6>Dashboard</h6>
       </div>
-      <div class="col-2">
+      <div class="col-4 col-sm-4 col-lg-2">
          <h6>Welcome, teacher. </h6>
-      </div>
       </div>
   </div>
 </nav>
@@ -73,12 +70,12 @@ if(!isset($_SESSION["user_id"]))
             <div class="card" style="min-height:400px;">
               <div class="card-header">
                 <div class="row">
-                  <div class="col-4 col-md-9 col-xs-10">
+                  <div class="col-lg-10 col-md-8 col-sm-6 col-6">
                   <h5 class="title" style="float: left">Quizzes</h5>
 
                   </div>
-                  <div class="col-6 col-md-3 col-xs-2">
-                       <button class="role-form-btn admin-btn" onclick="redirect_to_new_test()" style="height: 2rem; width:140px;"> New Quiz</button>
+                  <div class="col-lg-2 col-md-4 col-sm-6 col-6">
+                       <button class="role-form-btn admin-btn" onclick="redirect_to_new_test()" style="height: 2rem;"> New Quiz</button>
                   </div>
                 </div>  
               </div> 

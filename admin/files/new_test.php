@@ -44,13 +44,12 @@ if(isset($_POST['new_test'])) {
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="robots" content="noindex">
   <meta http-equiv="pragma" content="no-cache" />
   <meta http-equiv="expires" content="-1" />
   <title>
-    <?=ucfirst(basename($_SERVER['PHP_SELF'], ".php"));?>
+   New Quiz
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -89,14 +88,12 @@ if(isset($_POST['new_test'])) {
 		
 		</header>
     <nav class="navbar navbar-light bg-light">
-      <div class="container">
-          <div class="row justify-content-between" style="display: contents; width:100%;">
-          <div class="col-10">
-          <a href="dashboard.php" > <i class="fa fa-chevron-circle-left fa-lg" aria-hidden="true"></i></a>
+    <div class="row justify-content-between" style="display: contents; width:100%;">
+          <div class="col-6 col-sm-8 col-lg-1o">
+              <a href="dashboard.php" > <i class="fa fa-chevron-circle-left fa-lg" aria-hidden="true"></i></a>
           </div>
-          <div class="col-2">
-            <h6> Adding new quiz</h6>
-          </div>
+          <div class="col-4 col-sm-4 col-lg-2">
+            Adding New Quiz
           </div>
       </div>
     </nav>
@@ -132,11 +129,11 @@ if(isset($_POST['new_test'])) {
                      
                       <div class="form-group">
                         <label>Total Questions</label>
-                          <input type="number" class="form-control" name="quizTotal" placeholder="Quiz no. of questions" min="1" max="10" required/>
+                          <input type="number" class="form-control" name="quizTotal" placeholder="No. of questions" min="1" max="10" required/>
                       </div>
 
                       <div class="form-group">
-                        <label>Randomize questions?</label> <br>                      
+                        <label>Randomize quests?</label> <br>                      
                         <div class="form-check">   
                           <input class="form-check-input" type="radio" name="random" id="randomYes" value="1" checked>
                           <label class="form-check-label"> Yes </label>

@@ -9,13 +9,12 @@ if(!isset($_SESSION["user_id"]))
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="robots" content="noindex">
   <meta http-equiv="pragma" content="no-cache" />
   <meta http-equiv="expires" content="-1" />
   <title>
-    <?=ucfirst(basename($_SERVER['PHP_SELF'], ".php"));?>
+   Add Question
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -54,14 +53,12 @@ if(!isset($_SESSION["user_id"]))
 
 	</header>
   <nav class="navbar navbar-light bg-light">
-      <div class="container">
-          <div class="row justify-content-between" style="display: contents; width:100%;">
-          <div class="col-10">
-          <a href="dashboard.php" > <i class="fa fa-chevron-circle-left fa-lg" aria-hidden="true"></i></a>
+      <div class="row justify-content-between" style="display: contents; width:100%;">
+          <div class="col-6 col-sm-8 col-lg-1o">
+              <a href="dashboard.php" > <i class="fa fa-chevron-circle-left fa-lg" aria-hidden="true"></i></a>
           </div>
-          <div class="col-2">
-            <h6>Adding questions</h6>
-          </div>
+          <div class="col-4 col-sm-4 col-lg-2">
+            Adding Question
           </div>
       </div>
   </nav>
@@ -129,12 +126,14 @@ if(!isset($_SESSION["user_id"]))
           $sql = "INSERT INTO tbl_questions (question_text,optionA,optionB,optionC,optionD,correctAns,quest_id, score) values('$question_text','$op_a','$op_b','$op_c','$op_d','$op_correct','$intQuest', '$score')";
           $result = mysqli_query($conn,$sql);
           echo "<script>console.log('done 1');</script>";
+          
           if($result) {
             echo "<script>console.log('done 2');</script>";
             $question_id = mysqli_insert_id($conn);
             $sql1 = "INSERT INTO question_test_mapping VALUES('$question_id','$test_id')";
             mysqli_query($conn,$sql1);
-          
+           // header("Location:test_details.php?test_id=$test_id");
+
             echo '<script type="text/javascript">',
           '</script>';
           }
@@ -193,9 +192,9 @@ if(!isset($_SESSION["user_id"]))
                     
                       <div class="row"> 
                         <div class="col-6">
-                          <select id="correctAnswer" name="correctAnswer" name="class_option"  required style="width:100%;">
-                              <option selected="true" id="chosenAnswer" disabled="disabled">Choose answer</option>   
-                              <option value="A" >A</option>      
+                          <select id="correctAnswer" name="correctAnswer" name="class_option" style="width:100%;" required>
+                              <option selected="true" id="chosenAnswer" value="" disabled="disabled" >Choose answer</option>   
+                              <option value="A">A</option>      
                               <option value="B">B</option>      
                               <option value="C" >C</option>      
                               <option value="D" >D</option>      
@@ -221,9 +220,9 @@ if(!isset($_SESSION["user_id"]))
                     </div>
                   </div>
                   <div class="row center-element">
-                    <div class="col-md-8">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-7">
                       <div class="form-group">
-                        <button class="role-form-btn" id="addBtn">ADD QUESTION</button>
+                        <button class="role-form-btn" id="addBtn" >ADD QUESTION</button>
                       </div>
                     </div>
                   </div>
@@ -231,6 +230,22 @@ if(!isset($_SESSION["user_id"]))
               </div>
             </div>
         </div>
+
+
+        <div class="modal fade" id="questionAlert" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+              <div class="modal-body">
+                <span id="modalText"></span>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="role-form-btn" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
           <div class="col-md-2"></div>
         </div>
@@ -267,6 +282,8 @@ if(!isset($_SESSION["user_id"]))
 
     chosenAnswer = document.getElementById("chosenAnswer").value;
     console.log(chosenAnswer);
+
+
   </script>
  
 </body>
