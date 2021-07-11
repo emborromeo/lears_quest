@@ -44,7 +44,7 @@ $test_code = $_REQUEST['test_code'];
 						</span>
 					
             <div class="row center-element">
-                <div class="col-6 col-md-12">
+            <div class="col-12 col-md-12 col-sm-6">
                     <button onclick="getQuizLink()">Quiz Link</button> &nbsp;  &nbsp;  &nbsp;
                     <button onclick="getQuizCode()">Quiz Code</button> &nbsp;  &nbsp;  &nbsp;
                     <button onclick="getQuizEmbed()"> Embed </button> 
@@ -56,7 +56,7 @@ $test_code = $_REQUEST['test_code'];
             </div>
             <div id="login_form">
             <div class="row center-element">
-                  <div class="col-6 col-md-12">
+            <div class="col-12 col-md-12 col-sm-6">
                       <div class="form-group">
                         <input type="text" id="testCode" class="input100" value="" style="text-align:center; padding-left:10px">
                         <span class="focus-input100"></span>
@@ -66,7 +66,7 @@ $test_code = $_REQUEST['test_code'];
                   </div>
                   
                   <div class="row center-element">
-                  <div class="col-6 col-md-12">
+                  <div class="col-12 col-md-12 col-sm-6">
                       <div class="form-group" style="width: 100%;">
                         <button class="role-form-btn" onclick="copyCode()" data-toggle="modal" data-target="#" id="modalCopyAlert">Copy</button> <br>
                       </div>

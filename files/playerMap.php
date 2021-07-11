@@ -16,16 +16,15 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 	$student_id = $_SESSION['player_id'];
 	$ccode = $_SESSION['code'];
 	$testId = $_SESSION['test_id'];
-
+ 
 	$testCode = "SELECT * FROM tbl_tests WHERE generatedCode = '$ccode'";
 	$resultTest = mysqli_query($conn,$testCode);
 	$rowTest = mysqli_fetch_assoc($resultTest);
 	$testId = (int) $rowTest['id'];
-    echo $testId;
+
 
     $sql = "SELECT question_id FROM question_test_mapping WHERE test_id = $testId";
     $result = mysqli_query($conn,$sql);
-    
 
     $row1;                     
         while($row = mysqli_fetch_assoc($result)) {
@@ -79,7 +78,9 @@ width: 30vw;
   height: 60vh;
   
 }
-
+#star1:hover{
+	width: 4vw;
+}
 		</style>
 	</head>
 
@@ -147,9 +148,11 @@ width: 30vw;
 
 							</div>
 							<div class="col-2" >
+								<a href="#"  id="quest9"> 	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest9Btn"  class="circle-quests"></a>				
 
-							</div><div class="col-2" >
-								
+							</div>
+							<div class="col-2" >
+
 							</div>
 							<div class="col-2" >
 								<a href="#"  id="quest10"> 	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest10Btn"  class="circle-quests"></a>				
@@ -160,28 +163,8 @@ width: 30vw;
 							</div>
 					
 						</div>
-						<div class="row" style="margin: 0px;">
-							<div class="col-2">
-
-							</div>
-							<div class="col-2">
-
-							</div>
-							<div class="col-2" >
-								<a href="#"  id="quest9"> 	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest9Btn"  class="circle-quests"></a>				
-
-							</div><div class="col-2" >
-								
-							</div>
-							<div class="col-2" >
-
-							</div>
-							<div class="col-2" >
-
-							</div>
 					
-						</div>
-					<div class="row" style="margin: 30px;">
+					<div class="row" style="margin: 10px;">
 							<div class="col-2">
 
 							</div>
@@ -202,7 +185,7 @@ width: 30vw;
 							</div>
 					
 						</div>
-					<div class="row" style="margin: 30px;">
+					<div class="row" style="margin: 10px;">
 							<div class="col-1">
 
 							</div>
@@ -224,11 +207,11 @@ width: 30vw;
 					
 						</div>
 						<div class="row" style="margin: 0px;">
-							<div class="col-1"> 
+							<div class="col-4"> 
 								<a href="#"  id="quest6">	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest6Btn"  class="circle-quests"></a>					
 
 							</div>
-							<div class="col-10"> 
+							<div class="col-7"> 
 
 							</div>
 							<div class="col-1">
@@ -249,7 +232,7 @@ width: 30vw;
 
 							</div>	
 						</div>
-						<div class="row" style="margin: 30px;">
+						<div class="row" style="margin: 10px;">
 							<div class="col-4">
 
 							</div>
@@ -264,7 +247,7 @@ width: 30vw;
 
 							</div>		
 						</div>
-						<div class="row" style="margin: 30px;">
+						<div class="row" style="margin: 10px;">
 							<div class="col-2">
 
 							</div>
@@ -295,7 +278,7 @@ width: 30vw;
 						<div class="instructionText">						
 						<p class="story" id="welcomeText"> Welcome, young adventurer! </p> 
                             <div class="container"  style="width: 30vw;">
-								<p class="gameStory" id="story1" ></p>
+							<p class="gameStory" id="story1" ></p>
 							<p class="gameStory" id="story1a"></p>
 							<p class="gameStory" id="story2"></p>
 							<p class="gameStory" id="story2a"></p>
@@ -307,7 +290,6 @@ width: 30vw;
 											
 	                       <p id="dialogue"></p>					
 							<p class="story" id="dialogue1"></p>
-							<br>
 						<button id="continueBtn" onclick="continueText()" style="display: inline;"><img src="../assets/BUTTONS 2/next-btn.png" alt="" style=" width:8vw;"></button>
 						<a href="#"  id="viewBadge"><button id="nextBtn" onclick="nextBtn()" style="display: none;"><img src="../assets/BUTTONS 2/next-btn.png" alt="" style=" width:8vw;"></button></a> 
 						<a href="#"  id="finishBtn"><button id="finishBtn" onclick="finishBtn()" ><img src="../assets/BUTTONS 2/next-btn.png" alt="" style=" width:8vw;"></button></a> 
@@ -344,12 +326,12 @@ width: 30vw;
 							<div id="badgeAchievement">
 
 							</div>
-							<center><button onclick="nextBadge()" id="nextBadge" style="margin-top:150px;"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="width:8vw" > </button></center>
+							<center><button onclick="nextBadge()" id="nextBadge" style="margin-top:40vh;"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="width:8vw" > </button></center>
 
-							<center><button onclick="hideBadge()" id="hideBadge" style="margin-top: 150px;"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="width:8vw"> </button></center>
-							<center><button onclick="finalBadge()" id="finalBadge" style="margin-top: 150px; "><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="width:8vw"  > </button></center>
+							<center><button onclick="hideBadge()" id="hideBadge" style="margin-top: 40vh;"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="width:8vw"> </button></center>
+							<center><button onclick="finalBadge()" id="finalBadge" style="margin-top: 40vh; "><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="width:8vw"  > </button></center>
 
-							<center><a href="finalScorePage.php?code=<?php echo $ccode;?>"  id="finalPageBtn"><button  style="margin-top:150px;"><img src="../assets/BUTTONS 2/view-score.png" alt="" style="width:8vw"></button></a>	</center>
+							<center><a href="finalScorePage.php?code=<?php echo $ccode;?>"  id="finalPageBtn"><button  style="margin-top:40vh;"><img src="../assets/BUTTONS 2/view-score.png" alt="" style="width:8vw"></button></a>	</center>
 
 						</div>
 					</div>
@@ -654,7 +636,7 @@ width: 30vw;
  
 	}
 
-	
+
 
 	if(testTotal==1){
 		document.getElementById("quest2").style.visibility = "hidden"; 
@@ -721,6 +703,10 @@ width: 30vw;
 		document.getElementById("quest10").style.visibility = "hidden"; 
 		
 	}
+	else if(testTotal==10){
+		document.getElementById("quest10").style.visibility = "visible"; 
+		
+	}
 	else{
 		console.log("no quests"); 
 	}
@@ -737,6 +723,8 @@ width: 30vw;
 
 		document.getElementById("quest2").href = "questStory.php?id=<?php echo $row1["id"]-1; ?>"; 
 
+		document.getElementById("dialogue1").innerHTML="This is just the beginning, you can do this!";
+
 
 	}
 	else if(currentProgress==2){
@@ -747,7 +735,7 @@ width: 30vw;
 		document.getElementById("quest3Btn").src='../assets/BOARDS/location2.png';
 
 		document.getElementById("quest3").href = "questStory.php?id=<?php echo $row1["id"]-2; ?>"; 
-
+		document.getElementById("dialogue1").innerHTML="Wow, you’re doing great adventurer! ";
 	}
 	else if(currentProgress==3){
 		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
@@ -757,6 +745,7 @@ width: 30vw;
 		document.getElementById("quest4Btn").src='../assets/BOARDS/location2.png';
 
 		document.getElementById("quest4").href = "questStory.php?id=<?php echo $row1["id"]-3; ?>"; 
+		document.getElementById("dialogue1").innerHTML="There's so many obstacles! But it’s okay!";
 
 	}
 	else if(currentProgress==4){
@@ -770,6 +759,8 @@ width: 30vw;
 
 		document.getElementById("quest5").href = "questStory.php?id=<?php echo $row1["id"]-4; ?>"; 
 
+		document.getElementById("dialogue1").innerHTML="Quests becomes harder, but keep going!";
+
 	}
 	else if(currentProgress==5){
 		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
@@ -781,6 +772,8 @@ width: 30vw;
 		document.getElementById("quest6Btn").src='../assets/BOARDS/location2.png';
 
 		document.getElementById("quest6").href = "questStory.php?id=<?php echo $row1["id"]-5; ?>"; 
+
+		document.getElementById("dialogue1").innerHTML="Collect more star points adventurer.";
 
 		
 	}
@@ -796,6 +789,8 @@ width: 30vw;
 
 		document.getElementById("quest7").href = "questStory.php?id=<?php echo $row1["id"]-6; ?>"; 
 
+		document.getElementById("dialogue1").innerHTML="Learn and keep moving forward!";
+
 	}
 	else if(currentProgress==7){
 		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
@@ -809,6 +804,8 @@ width: 30vw;
 		document.getElementById("quest8Btn").src='../assets/BOARDS/location2.png';
 
 		document.getElementById("quest8").href = "questStory.php?id=<?php echo $row1["id"]-7; ?>"; 
+
+		document.getElementById("dialogue1").innerHTML="You have conquered many quests! ";
 
 	}
 	else if(currentProgress==8){
@@ -825,6 +822,8 @@ width: 30vw;
 
 		document.getElementById("quest9").href = "questStory.php?id=<?php echo $row1["id"]-8; ?>"; 
 
+		document.getElementById("dialogue1").innerHTML="Yay! You’re almost on your destination!";
+
 	}
 	else if(currentProgress==9){
 		document.getElementById("quest1Btn").src='../assets/BOARDS/locationfailed.png';
@@ -840,6 +839,9 @@ width: 30vw;
 		document.getElementById("quest10Btn").src='../assets/BOARDS/location2.png';
 
 		document.getElementById("quest10").href = "questStory.php?id=<?php echo $row1["id"]-9; ?>"; 
+
+		document.getElementById("dialogue1").innerHTML="Awesome! You did your best adventurer!";
+
 
 	}
 	else if(currentProgress==10){

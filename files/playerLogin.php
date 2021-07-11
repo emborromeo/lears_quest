@@ -36,9 +36,9 @@ if(isset($_SESSION["player_id"]))
 						</span>
 						
 						
-						<form id="player_login_form">
-                  <div class="row">
-                    <div class="col-md-12">
+					<form id="player_login_form">
+					<div class="row center-element">
+                    <div class="col-12">
                       <div class="form-group">
                         <input type="text" id="studentUsername" name="studentUsername" class="input100" placeholder="Username" >
                         <span class="focus-input100"></span>
@@ -49,8 +49,8 @@ if(isset($_SESSION["player_id"]))
                       </div>
                     </div>
                   </div>
-                   <div class="row">
-                    <div class="col-md-12">
+				  <div class="row center-element">
+                    <div class="col-12">
                       <div class="form-group">
                         <input type="password" id="studentPassword" name="studentPassword" class="input100" placeholder="Password">
                       	<span class="focus-input100"></span>
@@ -62,7 +62,7 @@ if(isset($_SESSION["player_id"]))
                     </div>
                   </div>
                   <div class="row center-element py-3">
-                    <div class="col-md-12">
+                    <div class="col-12">
                       <div class="form-group" style="width: 100%;">
                         <button class="role-form-btn">Sign in</button>
                       </div>

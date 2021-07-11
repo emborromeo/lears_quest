@@ -69,7 +69,7 @@ $currentCode = $_SESSION['code'];
 				 <div class="row justify-content-center" id="finalBoard" style="display: contents; padding:40px">
 					<center>				 
 						<div class="container-final" style="background-image: url('../assets/BOARDS/final-board.png'); ">
-                     <div class="container" style="padding:18vw;    height: 50vh;">
+                     <div class="container" style="padding-top:16vw;    height: 50vh;">
 					<div class="col-12" style="display:contents">
                         <h1 id="finalScoreNum"><?= $studentScore?></h1>
 						<div id="collectedStars">

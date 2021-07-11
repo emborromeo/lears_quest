@@ -88,7 +88,7 @@ margin: auto;
 
   }
   #timer{
-    margin-top: 30px;
+    margin-top: 25px;
   }
 
 	</style>
@@ -116,14 +116,14 @@ margin: auto;
 				<!-- ROW FOR SETTINGS-->
 			    <div class="row justify-content-between" id="settingsRow" >
 
-					<div class="col-1 col-sm-1">
-          <button id="backBtn" onclick="backBtn1()"><img src="../assets/BUTTONS 2/back.png" alt="" style="width: 3vw;"> </button>
-					</div>
+            <div class="col-1 col-sm-1">
+            <button id="backBtn" onclick="backBtn1()"><img src="../assets/BUTTONS 2/back.png" alt="" style="width: 3vw;"> </button>
+            </div> 
 
-					<div class="col-2 col-sm-3">
-            <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" style="width: 3vw;" id="soundImg"> </button>
-             <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" style="width: 3vw;"> </i></a> 
-					</div>
+            <div class="col-3 col-sm-3">
+              <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" style="width: 3vw; margin:5px" id="soundImg"> </button> 
+              <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" style="width: 3vw;"> </i></a> 
+            </div>
 
 			    </div>
 			
@@ -159,7 +159,7 @@ margin: auto;
 				<div id="popup1" class="overlay">
 
 					<div id="feedbackBg">
-						<div class="popup" style="padding: 0px; margin:160px auto">
+						<div class="popup" id="popup" style=" margin-top: 100px;">
               <div class="content">		
 
                 <center><p id="feedbackText">
@@ -269,6 +269,8 @@ function getTime(){
   //enable next queston
       document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/correct1.png')";
       document.getElementById("star1").style.display="block";
+      document.getElementById("popup").style.paddingTop="18vh";
+
       console.log("correct");
       feedbackText.innerHTML = "  ";
       correctSound.play();
@@ -278,6 +280,7 @@ function getTime(){
     else{
       document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/wrong2.png')";
       document.getElementById("star1").style.display="none";
+      document.getElementById("popup").style.paddingTop="28vh";
 
       feedbackText.innerHTML = "The answer is " + answer;
       console.log(answer)

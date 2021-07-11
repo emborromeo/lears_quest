@@ -60,7 +60,7 @@ $student_id = $_SESSION['player_id'];
 
 
                   <div class="row center-element">
-                    <div class="col-6 col-md-12">
+                    <div class="col-12 col-md-12">
                       <div class="form-group">
                         <input type="text" name="testCode" id="testCode" class="input100" style="text-align:center; padding-left:10px" required>
                         <span class="focus-input100"></span>
@@ -70,7 +70,7 @@ $student_id = $_SESSION['player_id'];
                   </div>
                   
                   <div class="row center-element py-3">
-                    <div class="col-6 col-md-12">
+                    <div class="col-12 col-md-12">
                       <div class="form-group" style="width: 100%;">
                       <a href="#" data-toggle="modal" data-target="#" id="modalQuestionAlert"> <button class="role-form-btn" onclick="checkCode()">Submit </button></a>
                       </div>

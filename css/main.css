@@ -321,7 +321,6 @@ iframe {
   border: 5px #fff solid;
   width:90vw;
   height:100vh;
-  background-image: url("../assets/bg-sample.png");
   background-size: 100% 100%;
   
 }
@@ -504,14 +503,13 @@ iframe {
   font-family: AzoSans;
 }
 .btn-choice{
-  color:#fff;
-  background-color: #9f6b38;
-  margin: 10px;
+
+  margin: 8px;
   padding: 5px;
   word-wrap: break-word;
   display: inline-block;
-  border-radius:5px
-  ;width:100%;
+  border-radius:5px;
+  width:100%;
   text-align:left;
 }
 #feedbackTitle{
@@ -532,8 +530,11 @@ iframe {
 
   /*GAME MAP*/
 .circle-quests:hover{
-  width: 6vw;;
+  width: 8vw;
+
 }
+
+
   /* RESPONSIVE */
 
 
@@ -543,9 +544,6 @@ iframe {
     padding: 177px 90px 33px 85px;
   }
 
-  .login100-form, .role-form {
-    width: 50%;
-  }
   .card-header .title{
     font-size: 1.2rem;
   }
@@ -595,7 +593,7 @@ iframe {
     height:60vh;
   }
   .btn-choice{
-    margin: 3px;
+    margin: 8px;
   }
   .symbol-input100{
     top: 0px;
@@ -634,7 +632,6 @@ iframe {
   border-radius: 5px;
   width: 90%;
   position: relative;
-  transition: all 5s ease-in-out;
 }
 
 .popup span {
@@ -642,10 +639,10 @@ iframe {
   color: #333;
   font-family: Tahoma, Arial, sans-serif;
 }
-
+/*
 .popup .content {
   overflow: auto;
-}
+}*/
 .btn-choice{
   color:#000;
   background-color: #fff;

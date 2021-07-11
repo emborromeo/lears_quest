@@ -37,7 +37,7 @@ if(isset($_SESSION["user_id"]))
                 <form id="login_form">
                 
                 <div class="row center-element">
-                    <div class="col-6 col-md-12">
+                    <div class="col-12 col-md-12 col-sm-6">
                       <div class="form-group">
                         <input type="text" id="username" name="username" class="input100" placeholder="Username" >
                         <span class="focus-input100"></span>
@@ -50,7 +50,7 @@ if(isset($_SESSION["user_id"]))
                   </div>
                  
                   <div class="row center-element">
-                    <div class="col-6 col-md-12">
+                    <div class="col-12 col-md-12 col-sm-6">
                       <div class="form-group">
                         <input type="password" id="password" name="password" class="input100" placeholder="Password">
                       	<span class="focus-input100"></span>
@@ -62,7 +62,7 @@ if(isset($_SESSION["user_id"]))
                     </div>
                   </div>
                   <div class="row center-element">
-                  <div class="col-6 col-md-12">
+                  <div class="col-12 col-md-12 col-sm-6">
                       <div class="form-group" style="width: 100%;">
                         <button class="role-form-btn">Sign in</button>
                       </div>
