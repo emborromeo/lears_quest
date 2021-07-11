@@ -56,42 +56,43 @@ $code = $_SESSION['code'];
 
 <body>
 <audio id="bgMusic" loop autoplay>
-  <source src="../assets/map2.mp3" type="audio/mpeg" />
+	<source src="../assets/SOUNDS/quest.ogg" type="audio/mpeg"/>
 </audio>
-<div class="gameWrapper" id="gameWrapper" style=" background: rgba(0,0,0,0.3)">
+
+<div class="gameWrapper" id="gameWrapper">
     <div class="mainHolder">
 		<div class="canvasHolder">
             <center>
-        	<div class="gameCanvas" id="gameCanvas" style="height: 100vh;">
-            <div class="row justify-content-between" id="settingsRow" >
-					<div class="col-1">
-                    <button id="backBtn"onclick="backBtn1()"><img  style="width: 3vw;" src="../assets/BUTTONS 2/back.png" alt="" > </button>
-					</div>
+        	<div class="gameCanvas" style=" display:contents;">
+                <div class="row justify-content-between" id="settingsRow" >
+                        <div class="col-1">
+                        <button id="backBtn"onclick="backBtn1()"><img  style="width: 3vw;" src="../assets/BUTTONS 2/back.png" alt="" > </button>
+                        </div>
 
-					<div class="col-3">
-                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt=""style="width: 3vw;" id="soundImg"> </button>
-                        <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" style="width: 3vw;"> </i></a> 
-					</div>
+                        <div class="col-3">
+                            <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt=""style="width: 3vw;" id="soundImg"> </button>
+                            <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" style="width: 3vw;"> </i></a> 
+                        </div>
 
-			 	</div>
-                 <center>
-				<div class="row justify-content-center" style="background-color: red; width:70vw; height:40vw; border-radius: 10px;background: rgba(0,0,0,0.3);margin-top:10px">
+                </div>
+                    <center>
+                <div class="row justify-content-center" id="gameMap" style=" width:70vw; height:45vw; border-radius: 10px;background: rgba(0,0,0,0.3);margin-top:10px">
 
-                    <div class="col-12">
-                       <center> <p style="color: #fff; font-size:2vw" id="questTitle"><?= $rowQuest['quest_task']?></p></center> 
+                        <div class="col-12">
+                        <center> <p style="color: #fff; font-size:2vw" id="questTitle"><?= $rowQuest['quest_task']?></p></center> 
 
-                    </div>
+                        </div>
 
-                    <div class="col-12">
-                    	<center><p style="color: #fff;font-size:2vw" id="questStory"></p>	</center> 
+                        <div class="col-12">
+                            <center><p style="color: #fff;font-size:2vw" id="questStory"></p>	</center> 
 
-                    </div>
-                   
-                    <div class="col-12" style="margin: 30px;">
+                        </div>
+                    
+                        <div class="col-12" style="margin: 30px;">
 
-                    </div>
-                   
-				</div>
+                        </div>
+                    
+                </div>
                 </center>
                 <div class="row" style="margin-top: -30px;">
                      <div class="col-12" >
@@ -108,6 +109,7 @@ $code = $_SESSION['code'];
 		
 	
 <script>
+
   function pauseMusic(){
         let bgMusic= document.getElementById("bgMusic");
 
@@ -124,12 +126,14 @@ $code = $_SESSION['code'];
     }
    function backBtn1(){
        window.location.href="playerMap.php"
+       document.getElementById("btnClick").play();
+
    }
     let questTask  = <?php echo json_encode ($rowQuest['quest_task']); ?>; 
     let questTaskDescription  = <?php echo json_encode ($rowQuest['quest_task_description']); ?>; 
     let questImg  = <?php echo json_encode ($rowQuest['img_path']); ?>; 
     console.log(questImg);
-	document.getElementById("gameCanvas").style.backgroundImage="url('<?php echo $rowQuest['img_path']; ?>')";
+//	document.getElementById("gameCanvas").style.backgroundImage="url('<?php echo $rowQuest['img_path']; ?>')";
 	document.getElementById("gameWrapper").style.backgroundImage="url('<?php echo $rowQuest['img_path']; ?>')";
 
 

@@ -198,7 +198,9 @@ iframe {
   display: block;
   padding-bottom: 30px;
 }
-
+.row{
+  margin: 0px;
+}
 
 /*BUTTON*/
 
@@ -295,9 +297,7 @@ iframe {
 			width: 100%;
 			height: 100%;
 		/*	position: absolute;*/
-      background-image: url("../assets/BACKGROUNDS/2blur.png");
       background-size: 100% 100%;
-      background-color: #d2d2d2;
 
 }
 .gameWrapper::after {
@@ -339,8 +339,8 @@ iframe {
   transform: translate(-50%, -50%);
 }
 #settingsRow{
-  margin-left:0px;
-  margin-top: 10px;
+  margin-left:5px;
+  margin-top: -10px;
 }
 #backBtn{
   color: #679847;
@@ -363,7 +363,6 @@ iframe {
 
 #gameMap{
   width: 100%;
-  height: 60vh;
   
 }
 
@@ -492,7 +491,7 @@ iframe {
   display: contents;
 }
 #question{
-  color: #fff;
+  color: #f1e7c3 ;
   font-size: 2.5vw;
   margin-top: -20px;
 
@@ -530,7 +529,12 @@ iframe {
   font-size: 20px;
   }
  
-/* RESPONSIVE */
+
+  /*GAME MAP*/
+.circle-quests:hover{
+  width: 6vw;;
+}
+  /* RESPONSIVE */
 
 
 

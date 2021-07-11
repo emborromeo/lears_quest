@@ -43,25 +43,20 @@ $test_code = $_REQUEST['test_code'];
 							Here's the quiz code:
 						</span>
 					
-            <div class="row">
-              <div class="col">
-                <button onclick="getQuizLink()">Quiz Link</button>
+            <div class="row center-element">
+                <div class="col-6 col-md-12">
+                    <button onclick="getQuizLink()">Quiz Link</button> &nbsp;  &nbsp;  &nbsp;
+                    <button onclick="getQuizCode()">Quiz Code</button> &nbsp;  &nbsp;  &nbsp;
+                    <button onclick="getQuizEmbed()"> Embed </button> 
+	                  <hr>
+                  </div>
+            
+              
 
-              </div>
-              <div class="col">
-                <button onclick="getQuizCode()">Quiz Code</button>
-
-              </div>
-              <div class="col">
-                <button onclick="getQuizEmbed()"> Embed </button>
-
-
-              </div>
-
-            </div>	<hr>
+            </div>
             <div id="login_form">
-                  <div class="row">
-                    <div class="col-md-12">
+            <div class="row center-element">
+                  <div class="col-6 col-md-12">
                       <div class="form-group">
                         <input type="text" id="testCode" class="input100" value="" style="text-align:center; padding-left:10px">
                         <span class="focus-input100"></span>
@@ -70,8 +65,8 @@ $test_code = $_REQUEST['test_code'];
                     </div>
                   </div>
                   
-                  <div class="row center-element py-3">
-                    <div class="col-md-12">
+                  <div class="row center-element">
+                  <div class="col-6 col-md-12">
                       <div class="form-group" style="width: 100%;">
                         <button class="role-form-btn" onclick="copyCode()" data-toggle="modal" data-target="#" id="modalCopyAlert">Copy</button> <br>
                       </div>

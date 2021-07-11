@@ -88,7 +88,7 @@ margin: auto;
 
   }
   #timer{
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
 	</style>
@@ -96,11 +96,23 @@ margin: auto;
 	</head>
 
 <body style="display: flex;">
-<div class="gameWrapper" id="gameWrapper" >
+<audio id="bgMusic" loop autoplay>
+	<source src="../assets/SOUNDS/3" type="audio/mpeg"/>
+</audio>
+<audio id="correctSound">
+	<source src="../assets/SOUNDS/correct1.wav" type="audio/mpeg"/>
+</audio>
+<audio id="wrongSound">
+	<source src="../assets/SOUNDS/wrong.wav" type="audio/mpeg"/>
+</audio>
+<audio id="btnClick">
+  <source src="../assets/SOUNDS/button.wav" type="audio/mpeg"/>
+</audio>
+<div class="gameWrapper" id="gameWrapper" style="background-size:100% 100%;" >
     <div class="mainHolder">
 		<div class="canvasHolder">
       <center>
-			<div class="gameCanvas" id="gameCanvas" style="height: 100vh;">
+			<div class="gameCanvas" id="gameCanvas" style="display:contents">
 				<!-- ROW FOR SETTINGS-->
 			    <div class="row justify-content-between" id="settingsRow" >
 
@@ -114,16 +126,10 @@ margin: auto;
 					</div>
 
 			    </div>
-				<!-- ROW FOR GAME INFO - PROGRESS BAR, SCORE, BADGES -->
-				<div class="row justify-content-center" id="gameInfo" >
-				<!--PROGRESS BAR-->
-				</div>
-
-				<!-- ROW QUESTION-->
-     
-				<div class="row justify-content-center" id="gameMap" style="margin-left:0px">
+			
+				<div class="row justify-content-center" id="gameMap" style="margin-top: 30px;">
 					    <center>
-            <div class="container-quiz" style="background-image: url('../assets/BOARDS/quest-box.png');width:70vw; height:auto;margin-top:-45px">
+            <div class="container-quiz" style="background-image: url('../assets/BOARDS/quest-box.png');width:70vw; margin-top:-45px">
               <div class="row justify-content-center">
                   <span id="question"><?= $row1["question_text"];?></span>
               </div> <br> 
@@ -188,6 +194,8 @@ margin: auto;
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
 
 <script type="text/javascript">
+      let btnClick  = document.getElementById("btnClick");
+
       document.getElementById("star1").style.display="none";
 
         let minutesLabel = document.getElementById("minutes");
@@ -243,10 +251,13 @@ function getTime(){
         }
     }
   function submitAnswer(){    
+    btnClick.play();
 
     let getSelectedAnswer =document.querySelector('input[name="q_answer"]:checked');   
     let selectedAnswer= getSelectedAnswer.value;   
-      
+    let correctSound = document.getElementById("correctSound");
+    let wrongSound = document.getElementById("wrongSound");
+
 
     console.log(selectedAnswer);
 
@@ -260,6 +271,7 @@ function getTime(){
       document.getElementById("star1").style.display="block";
       console.log("correct");
       feedbackText.innerHTML = "  ";
+      correctSound.play();
 
       updateScore();
     }
@@ -269,6 +281,7 @@ function getTime(){
 
       feedbackText.innerHTML = "The answer is " + answer;
       console.log(answer)
+      wrongSound.play();
       updateProgress();
     }
 

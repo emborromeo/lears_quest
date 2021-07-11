@@ -1,18 +1,21 @@
 <?php
 session_start();
-if(!isset($_SESSION["player_id"]) && ($_SESSION["code"]))
+
+
+if(!isset($_SESSION["player_id"]) )
+//$resultCode = $_POST["testCode"];
+//$resultCode1 = $_REQUEST['test_code'];
+
+
 
 ?>
 
 <?php
 include '../database/config.php';
-//$resultCode = $_POST["testCode"];
-//$resultCode1 = $_REQUEST['test_code'];
+
 $resultCode = $_REQUEST['testCode'];
 
 $_SESSION['code'] = $resultCode;
-
-
 $student_id = $_SESSION['player_id'];
 
 $testCode = "SELECT * FROM tbl_tests WHERE generatedCode = '$resultCode' ";
@@ -24,8 +27,7 @@ $_SESSION['test_id'] = $testId;
 
 
 $studentScore = "INSERT INTO students (test_id, student_id, score) VALUES('$testId', '$student_id' ,'0') ";
-$insertScore = mysqli_query($conn,$studentScore);
-
+$insertStudent= mysqli_query($conn, $studentScore);
 ?>
 <html>
 	<head>
@@ -46,13 +48,16 @@ $insertScore = mysqli_query($conn,$studentScore);
 
 <body>
 <audio id="bgMusic" loop autoplay>
-  <source src="../assets/map2.mp3" type="audio/mpeg" />
+	<source src="../assets/SOUNDS/start.mp3" type="audio/mpeg"/>
 </audio>
-<div class="gameWrapper" >
+<audio id="btnClick">
+  <source src="../assets/SOUNDS/button.wav" type="audio/mpeg"/>
+</audio>
+<div class="gameWrapper" style="background-image:url('../assets/BACKGROUNDS/2.png');background-size:100% 100%;";">
     <div class="mainHolder">
 		<div class="canvasHolder">
 			<center>
-        	<div class="gameCanvas" style="background-image:url('../assets/BACKGROUNDS/2.png');">
+        	<div class="gameCanvas" style=" display:contents;">
         		<div class="row" id="settingsRow" >
 					<div class="col-lg-10 col-9">
                     <button id="backBtn" hidden ><i class="fa fa-chevron-left  fa-lg" hidden></i> Back</button>
@@ -84,8 +89,11 @@ $insertScore = mysqli_query($conn,$studentScore);
 		
 	
 <script>
+    let btnClick  = document.getElementById("btnClick");
 
 	function start(){
+	btnClick.play();
+
 	window.location.replace("playerMap.php");
 
 	}

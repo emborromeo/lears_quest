@@ -1,12 +1,10 @@
 <?php
 session_start();
-if(!isset($_SESSION["player_id"]))
+if(isset($_SESSION["player_id"]))
+    
+$student_id = $_SESSION['player_id'];
 
-?>
-
-<?php
-
-  include '../database/config.php';
+ include '../database/config.php';
 
    
  $checkCode = "SELECT `generatedCode` FROM tbl_tests ";
@@ -18,6 +16,11 @@ if(!isset($_SESSION["player_id"]))
 
   }
 
+?>
+
+<?php
+
+ 
  
      ?>
 <!DOCTYPE html>
@@ -28,7 +31,7 @@ if(!isset($_SESSION["player_id"]))
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="robots" content="noindex">
   <title>
-  Publish Page
+ Lear's Quest
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -56,8 +59,8 @@ if(!isset($_SESSION["player_id"]))
             <!--<form id="login_form" method="post" action="playerStart.php">-->
 
 
-                  <div class="row">
-                    <div class="col-md-12">
+                  <div class="row center-element">
+                    <div class="col-6 col-md-12">
                       <div class="form-group">
                         <input type="text" name="testCode" id="testCode" class="input100" style="text-align:center; padding-left:10px" required>
                         <span class="focus-input100"></span>
@@ -67,9 +70,9 @@ if(!isset($_SESSION["player_id"]))
                   </div>
                   
                   <div class="row center-element py-3">
-                    <div class="col-md-12">
+                    <div class="col-6 col-md-12">
                       <div class="form-group" style="width: 100%;">
-                        <button class="role-form-btn" onclick="checkCode()">Submit </button>
+                      <a href="#" data-toggle="modal" data-target="#" id="modalQuestionAlert"> <button class="role-form-btn" onclick="checkCode()">Submit </button></a>
                       </div>
                     </div>
                   </div>
@@ -86,7 +89,7 @@ if(!isset($_SESSION["player_id"]))
                         <span id="modalText"></span>
                       </div>
                       <div class="modal-footer">
-                      <a href="#" data-toggle="modal" data-target="#" id="modalQuestionAlert1"> <button type="button" class="role-form-btn" data-dismiss="modal">Close</button></a>
+                     <button type="button" class="role-form-btn" data-dismiss="modal">Close</button>
                       </div>
                     </div>
                   </div>
@@ -133,8 +136,6 @@ if(!isset($_SESSION["player_id"]))
 
    }
    else{
-     alert("Incorrect Quiz Code")
-
     document.getElementById("modalQuestionAlert").dataset.target ="#codeAlert";
     document.getElementById("modalText").innerHTML= "Incorrect Quiz Code";
    }

@@ -21,10 +21,11 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 	$resultTest = mysqli_query($conn,$testCode);
 	$rowTest = mysqli_fetch_assoc($resultTest);
 	$testId = (int) $rowTest['id'];
-
+    echo $testId;
 
     $sql = "SELECT question_id FROM question_test_mapping WHERE test_id = $testId";
     $result = mysqli_query($conn,$sql);
+    
 
     $row1;                     
         while($row = mysqli_fetch_assoc($result)) {
@@ -67,24 +68,36 @@ if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 		<style>
 			#feedbackBg{
 background-size: 100% 100%;
-width: 25%;
-height: 50%;
-margin: auto;
-    margin-top: auto;
+width: 30vw;
+    height: 50vh;
+    margin: auto;
+    margin-top: -110px;
 
 }
+
+#gameMap{
+  height: 60vh;
+  
+}
+
 		</style>
 	</head>
 
 <body style="display: flex;">
 <audio id="bgMusic" loop autoplay>
-  <source src="../assets/map2.mp3" type="audio/mpeg"/>
+  <source src="../assets/SOUNDS/question.mp3" type="audio/mpeg"/>
 </audio>
-<div class="gameWrapper" style="background-image:url('../assets/BACKGROUNDS/map1blur.png')">
+<audio id="badgeSound">
+  <source src="../assets/SOUNDS/badge.mp3" type="audio/mpeg"/>
+</audio>
+<audio id="btnClick">
+  <source src="../assets/SOUNDS/button.wav" type="audio/mpeg"/>
+</audio>
+<div class="gameWrapper" style="background-image:url('../assets/BACKGROUNDS/MAP\ 1.png'); background-size:100% 100%;"">
     <div class="mainHolder">
 		<div class="canvasHolder">
 			<center>	
-			<div class="gameCanvas" style="background-image:url('../assets/BACKGROUNDS/MAP\ 1.png'); height: 100vh; ">
+			<div class="gameCanvas" style="display:contents; ">
 				<!-- ROW FOR SETTINGS-->
 				<div class="row" id="settingsRow" >
 					<div class="col-1 col-sm-1">
@@ -126,9 +139,71 @@ margin: auto;
                             		
 				<div class="row justify-content-center" id="gameMap" style="margin-left:0px">
 					<div class="container-quests">
+					<div class="row" style="margin: 0px;">
+							<div class="col-2">
+
+							</div>
+							<div class="col-2">
+
+							</div>
+							<div class="col-2" >
+
+							</div><div class="col-2" >
+								
+							</div>
+							<div class="col-2" >
+								<a href="#"  id="quest10"> 	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest10Btn"  class="circle-quests"></a>				
+
+							</div>
+							<div class="col-2" >
+
+							</div>
+					
+						</div>
+						<div class="row" style="margin: 0px;">
+							<div class="col-2">
+
+							</div>
+							<div class="col-2">
+
+							</div>
+							<div class="col-2" >
+								<a href="#"  id="quest9"> 	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest9Btn"  class="circle-quests"></a>				
+
+							</div><div class="col-2" >
+								
+							</div>
+							<div class="col-2" >
+
+							</div>
+							<div class="col-2" >
+
+							</div>
+					
+						</div>
 					<div class="row" style="margin: 30px;">
 							<div class="col-2">
-								<a href="#" id="quest10" >	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;"  id="quest10Btn"></a>					
+
+							</div>
+							<div class="col-2">
+								<a href="#"  id="quest8"> 	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest8Btn"  class="circle-quests"></a>				
+
+							</div>
+							<div class="col-2" >
+
+							</div><div class="col-2" >
+								
+							</div>
+							<div class="col-2" >
+
+							</div>
+							<div class="col-2" >
+
+							</div>
+					
+						</div>
+					<div class="row" style="margin: 30px;">
+							<div class="col-1">
 
 							</div>
 							<div class="col-2">
@@ -142,45 +217,47 @@ margin: auto;
 							<div class="col-2" >
 
 							</div>
-							<div class="col-2" >
-								<a href="#"  id="quest9"> 	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest9Btn"></a>				
+							<div class="col-4" >
+								<a href="#"  id="quest7"> 	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest7Btn"  class="circle-quests"></a>				
 
 							</div>
 					
 						</div>
-						<div class="row" style="margin: 30px;">
-							<div class="col-4"> 
-								<a href="#"  id="quest8">	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest8Btn"></a>					
+						<div class="row" style="margin: 0px;">
+							<div class="col-1"> 
+								<a href="#"  id="quest6">	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest6Btn"  class="circle-quests"></a>					
 
 							</div>
-							<div class="col-8">
-								<a href="#"  id="quest7"  style="margin-left: 40px;" >	<img src="../assets/BOARDS/locatio1.png" alt=""style="width: 5vw;" id="quest7Btn"></a>	
+							<div class="col-10"> 
+
+							</div>
+							<div class="col-1">
 
 							</div>
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-3">
-								<a href="#" id="quest6" style="margin-right:100px 50px;">	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest6Btn"></a>					
+								<a href="#" id="quest5" style="margin-right:100px 50px;">	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest5Btn"  class="circle-quests"></a>					
 
 							</div>
 							<div class="col-6">
+							<a href="#"  id="quest4"  style="margin-right:100px 50px;">	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest4Btn"  class="circle-quests"></a>					
 
 							</div>	
 							<div class="col-3">
-								<a href="#"  id="quest5"  style="margin-right:100px 50px;">	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest5Btn"></a>					
+								<a href="#"  id="quest3"  style="margin-right:100px 50px;">	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest3Btn"  class="circle-quests"></a>					
 
 							</div>	
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-4">
-								<a href="#"  id="quest4"style="margin-right:100px 50px;" >	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest4Btn"></a>					
 
 							</div>
 							<div class="col-4">
 								
 							</div>	
 							<div class="col-4">
-								<a href="#"  id="quest3" style="margin-bottom: -50px;margin-left: 110px;" >	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest3Btn"></a>	
+								<a href="#"  id="quest2" style="margin-bottom: -50px;margin-left: 110px;" >	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest2Btn" ></a>	
 
 							</div>	
 							<div class="col-4">
@@ -189,7 +266,6 @@ margin: auto;
 						</div>
 						<div class="row" style="margin: 30px;">
 							<div class="col-2">
-								<a href="#"  id="quest2"   style="margin-bottom:30px ;">	<img src="../assets/BOARDS/locatio1.png" alt=""style="width: 5vw;" id="quest2Btn"></a>					
 
 							</div>
 							<div class="col-3">
@@ -202,7 +278,7 @@ margin: auto;
 
 							</div>	
 							<div class="col-2">	
-								<a href="questStory.php?id=<?php echo $row1["id"]; ?>"  id="quest1"  style="margin:30px ;"> 	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest1Btn"> </a>	
+								<a href="questStory.php?id=<?php echo $row1["id"]; ?>"  id="quest1"  style="margin:30px ;"> 	<img src="../assets/BOARDS/locatio1.png" alt="" style="width: 5vw;" id="quest1Btn"  class="circle-quests"> </a>	
 							</div>
 						</div>
 	
@@ -268,12 +344,12 @@ margin: auto;
 							<div id="badgeAchievement">
 
 							</div>
-							<center><button onclick="nextBadge()" id="nextBadge"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="margin-top: 120px; width:8vw"> </button></center>
+							<center><button onclick="nextBadge()" id="nextBadge" style="margin-top:150px;"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="width:8vw" > </button></center>
 
-							<center><button onclick="hideBadge()" id="hideBadge"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="margin-top: 120px; width:8vw"> </button></center>
-							<center><button onclick="finalBadge()" id="finalBadge"><img src="../assets/BUTTONS 2/next-btn.png" alt=""   style="margin-top: 120px; width:8vw"> </button></center>
+							<center><button onclick="hideBadge()" id="hideBadge" style="margin-top: 150px;"><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="width:8vw"> </button></center>
+							<center><button onclick="finalBadge()" id="finalBadge" style="margin-top: 150px; "><img src="../assets/BUTTONS 2/next-btn.png" alt=""  style="width:8vw"  > </button></center>
 
-							<center style="padding: 10px;"><a href="finalScorePage.php?code=<?php echo $ccode;?>"  id="finalPageBtn" ><img src="../assets/BUTTONS 2/view-score.png" alt=""style="margin-top: 55px; width:8vw"></a>	</center>
+							<center><a href="finalScorePage.php?code=<?php echo $ccode;?>"  id="finalPageBtn"><button  style="margin-top:150px;"><img src="../assets/BUTTONS 2/view-score.png" alt="" style="width:8vw"></button></a>	</center>
 
 						</div>
 					</div>
@@ -289,6 +365,10 @@ margin: auto;
 		
 	
 <script>
+        let badgeSound  = document.getElementById("badgeSound");
+
+		let btnClick  = document.getElementById("btnClick");
+
 		document.getElementById("badge3x").style.display="none";
 		document.getElementById("badge50").style.display="none";
 		document.getElementById("badgeFast").style.display="none";
@@ -318,6 +398,7 @@ margin: auto;
     
 	function backBtn1(){
 		window.location.href="playerStart.php";
+		btnClick.play();
 
 	}
     function pauseMusic(){
@@ -359,30 +440,42 @@ margin: auto;
 
 	function continueText() {
 		if(click==0){
+		btnClick.play();
+
 		firstPar();
 			click=1;
 
 		}
 		else if(click==1){
+			btnClick.play();
+
 			secondPar();
 			click=2;
 		}
 		else if(click==2){
+			btnClick.play();
+
 			thirdPar();			
 			
 			click=3;
 		}
 		else if(click==3){
+			btnClick.play();
+
 			fourthPar();			
 			click=4;
 		}
 
 		else if(click==4){
+			btnClick.play();
+
 			fifthPar();			
 			click=5;
 		}
 		
 		else if(click==5){
+			btnClick.play();
+
 			sixthPar();			
 			continueBtn.style.display="none";
 			toQuest1.style.display="inline";
@@ -800,31 +893,38 @@ margin: auto;
 		document.getElementById("dialogue").innerHTML="Congratulations! ";
 		document.getElementById("dialogue1").innerHTML=" You're halfway through all the quest !";
 		document.getElementById("nextBtn").style.display="inline"
-
 		console.log("Halfway to complete the quests")
+
 	}
 	
 	
-	function nextBtn(){
+	function nextBtn(){		
+		btnClick.play();
+
 		document.getElementById("viewBadge").href="#popup1";
 		document.getElementById("gameInstructions").style.display="none";
+		document.getElementById("settingsRow").style.display="none";
+
+		badgeSound.play();
 
 	}
 	function hideBadge(){
 		document.getElementById("popup1").style.display="none";
 		document.getElementById("gameInstructions").style.display="block";
+		document.getElementById("settingsRow").style.display="flex";
 
 		document.getElementById("dialogue").innerHTML="Continue your journey! ";
 		document.getElementById("dialogue1").style.display="none";
 		document.getElementById("nextBtn").style.display="none";		  
 		document.getElementById("badge50").style.display="inline";
+		btnClick.play();
 
 	
 	} 
-		if(currentProgress>halfWay){
-			document.getElementById("badge50").style.display="inline";
+	if(currentProgress>halfWay){
+		document.getElementById("badge50").style.display="inline";
 
-		}
+	}
 	
 	if(currentProgress==testTotal){
 		document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb-finish.png')";
@@ -840,18 +940,25 @@ margin: auto;
 	function finishBtn(){
 		document.getElementById("finishBtn").href="#popup1";
 		document.getElementById("gameInstructions").style.display="none";
+		document.getElementById("settingsRow").style.display="none";
+
 		document.getElementById("hideBadge").style.display="none";
 		document.getElementById("nextBadge").style.display="inline";
+		badgeSound.play();
 
 
 
 	}
-	function nextBadge(){
+	function nextBadge(){		
+		btnClick.play();
+
 		if(currentScore>=passingScore){		
 			document.getElementById("badgeFinish").style.display="inline";
 
 				console.log("You passed");
 				document.getElementById("gameInstructions").style.display="block";
+				document.getElementById("settingsRow").style.display="flex";
+
 				document.getElementById("popup1").style.display="none";
 				document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb-pass.png')";
 
@@ -868,6 +975,8 @@ margin: auto;
 				document.getElementById("badgeFinish").style.display="inline";
 
 				document.getElementById("gameInstructions").style.display="inline";
+				document.getElementById("settingsRow").style.display="flex";
+
 				document.getElementById("popup1").style.display="none";
 				document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb-low.png')";
 
@@ -890,18 +999,25 @@ margin: auto;
 	}
 
 	function remarksBtn(){
+		btnClick.play();
+
 		if(currentScore>=passingScore){		
 		document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb-pass.png')";
 		document.getElementById("popup1").style.display="inline";
 
 		document.getElementById("remarksBtn").href="#popup1";
 		document.getElementById("gameInstructions").style.display="none";
+		document.getElementById("settingsRow").style.display="none";
+
 		document.getElementById("hideBadge").style.display="none";
 		document.getElementById("nextBadge").style.display="none";
 		document.getElementById("finalBadge").style.display="inline";
+		badgeSound.play();
+
 		} else if(currentScore<passingScore){
 			document.getElementById("feedbackBg").style.backgroundImage="url('../assets/BOARDS/fb-low.png')";
 		document.getElementById("popup1").style.display="inline";
+		document.getElementById("settingsRow").style.display="none";
 
 		document.getElementById("remarksBtn").href="#popup1";
 		document.getElementById("gameInstructions").style.display="none";
@@ -920,6 +1036,8 @@ margin: auto;
 
 		if(currentScore==testTotal){
 				document.getElementById("gameInstructions").style.display="block";
+				document.getElementById("settingsRow").style.display="flex";
+
 				document.getElementById("popup1").style.display="none";
 
 				console.log("Perfect Score")
@@ -935,6 +1053,7 @@ margin: auto;
 				document.getElementById("finishBtn").style.display="none";
 				document.getElementById("remarksBtn").style.display="none";
 				document.getElementById("finalBtn").style.display="inline";
+				btnClick.play();
 
 
 			}
@@ -945,6 +1064,7 @@ margin: auto;
 			document.getElementById("finalBadge").style.display="none";
 			document.getElementById("nextBtn").style.display="none";
 			document.getElementById("remarksBtn").style.display="none";
+			document.getElementById("settingsRow").style.display="flex";
 
 			document.getElementById("gameInstructions").style.display="block";
 
@@ -960,12 +1080,15 @@ margin: auto;
 		document.getElementById("popup1").style.display="inline";
 
 		document.getElementById("finalBtn").href="#popup1";
+		document.getElementById("settingsRow").style.display="none";
+
 		document.getElementById("gameInstructions").style.display="none";
 		document.getElementById("hideBadge").style.display="none";
 		document.getElementById("nextBadge").style.display="none";
 		document.getElementById("finalBadge").style.display="none";
 		document.getElementById("finalPageBtn").style.display="inline";
 
+		badgeSound.play();
 
 	}
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
+if(!isset($_SESSION["player_id"]) && ($_SESSION["code"]) ){
 }
 
 ?>
@@ -44,30 +44,32 @@ $currentCode = $_SESSION['code'];
 <audio id="bgMusic" loop autoplay>
   <source src="../assets/map2.mp3" type="audio/mpeg" />
 </audio>
-<div class="gameWrapper" style="background-image:url('../assets/BACKGROUNDS/1blur.png')">
+<audio id="btnClick">
+  <source src="../assets/SOUNDS/button.wav" type="audio/mpeg"/>
+</audio>
+<div class="gameWrapper" style="background-image:url('../assets/BACKGROUNDS/1.png');background-size:100% 100%;">
     <div class="mainHolder">
 		<div class="canvasHolder">
 			<center>
 
 		
-        	<div class="gameCanvas" style="background-image:url('../assets/BACKGROUNDS/1.png')">
+        	<div class="gameCanvas" style="display: contents;">
 			
-        		<div class="row justify-content-between" id="settingsRow" >
-					<div class="col-1">
-					<button id="backBtn" onclick="backBtn1()"><img src="../assets/BUTTONS 2/back.png" alt="" style="width: 3vw;"> </button>
+        	<div class="row" id="settingsRow" >
+					<div class="col-lg-10 col-9">
+                    <button id="backBtn" hidden ><i class="fa fa-chevron-left  fa-lg" hidden></i> Back</button>
 					</div>
 
-					<div class="col-2">
-                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" style="width: 3vw;" id="soundImg"> </button>
+					<div class="col-lg-2 col-3">
+                        <button id="musicBtn" onclick="pauseMusic()"><img src="../assets/BUTTONS 2/sound-on.png" alt="" style="width: 3vw;"  id="soundImg"> </button>
                         <a href="studentLogout.php"> <img src="../assets/BUTTONS 2/logout.png" alt="" style="width: 3vw;"> </i></a> 
 					</div>
 
 			 	</div>
-
 				 <div class="row justify-content-center" id="finalBoard" style="display: contents; padding:40px">
 					<center>				 
 						<div class="container-final" style="background-image: url('../assets/BOARDS/final-board.png'); ">
-                     <div class="container" style="padding:170px;    height: 50vh;">
+                     <div class="container" style="padding:18vw;    height: 50vh;">
 					<div class="col-12" style="display:contents">
                         <h1 id="finalScoreNum"><?= $studentScore?></h1>
 						<div id="collectedStars">
@@ -101,6 +103,7 @@ $currentCode = $_SESSION['code'];
 		
 	
 <script>
+		let btnClick  = document.getElementById("btnClick");
 
 	    let finalScore = <?php echo (int) ($studentScore) ; ?>;
 		document.getElementById("badge100").style.display="none";
@@ -129,7 +132,7 @@ $currentCode = $_SESSION['code'];
 
 	let star = document.createElement("img"); 
     star.src="../assets/BUTTONS 2/Stars.png";
-	star.style.width="7vw";
+	star.style.width="5vw";
 
 	starsDiv.appendChild(star);  
 
@@ -154,6 +157,7 @@ if(finalScore==testTotal){
    function retryQuiz(){
     let studentid = <?php echo (int) $student_id; ?>;
     let currentCode = <?php echo json_encode($currentCode) ; ?>;
+	btnClick.play();
 
     $.ajax({
       url: "retryQuiz.php",
